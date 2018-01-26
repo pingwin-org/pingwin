@@ -1,0 +1,23 @@
+{
+  "name": "pingwin",
+  "version": "0.0.1",
+  "description": "Ping Pong Elo-rating website",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DOhlsson/pingwin.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DOhlsson/pingwin/issues"
+  },
+  "homepage": "https://github.com/DOhlsson/pingwin#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^5.0.1"
+  }
+}
