@@ -1,8 +1,6 @@
 const users = require('express').Router();
 const User = require('mongoose').model('User');
 
-var userList = [];
-
 users.get('/', async function (req, res) {
   const users = await User.find({}).select('-pin').exec();
   res.send(users);
