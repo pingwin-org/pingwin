@@ -23,6 +23,6 @@ const MatchSchema = new mongoose.Schema({
   player2rating: Number,
   player1ratingChange: Number,
   player2ratingChange: Number,
-}
+});
 
 module.exports = mongoose.model('Match', MatchSchema);

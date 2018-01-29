@@ -1,2 +1,2 @@
 #!/bin/bash
-curl -X GET localhost:3000/api/users
+curl -sS -X GET localhost:3000/api/users | json2csv

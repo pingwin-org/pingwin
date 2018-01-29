@@ -19,7 +19,8 @@
   "homepage": "https://github.com/DOhlsson/pingwin#readme",
   "dependencies": {
     "express": "^4.16.2",
-    "mongoose": "^5.0.1"
+    "mongoose": "^5.0.1",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "nodemon": "^1.14.11"
