@@ -1,16 +1,24 @@
 const users = require('express').Router();
+const User = require('mongoose').model('User');
 
 var userList = [];
 
-users.get('/', function (req, res) {
-  res.send(userList);
+users.get('/', async function (req, res) {
+  const users = await User.find({}).select('-pin').exec();
+  res.send(users);
 });
 
-users.post('/', function (req, res) {
-  const newUser = req.body;
-  console.log(req.body);
-  userList.push(req.body);
-  res.sendStatus(200);
+users.post('/', async function (req, res) {
+  try {
+    const user = new User(req.body);
+    delete user.rating; // prevent rating from being set by the request
+    await user.save();
+    console.log('Added new user', user.username);
+    res.sendStatus(200);
+  } catch (e) {
+    console.log('error posting user', e);
+    res.status(500).send(e.message);
+  }
 });
 
 module.exports = users;
