@@ -1,40 +1,23 @@
 'use strict';
 
-// TODO: clean up
-// TODO: better maths
-
 // replace with k-value
 const stake = 10;
 
 function match(winner, loser) {
-  console.log();
-  var winnerOldRating = winner.rating;
-  var loserOldRating = loser.rating;
+  const prob = probabilityOfWinning(winner, loser);
+  const winnerGain = Math.round((1 - prob) * boost(winner) * stake);
+  const loserGain = -Math.round((1 - prob) * boost(loser) * stake);
 
-  var winnerGain = Math.round(
-    (1 - probabilityOfWinning(winner, loser)) * boost(winner) * stake);
-  var loserLoss = Math.round(
-    probabilityOfWinning(loser, winner) * boost(loser) * stake);
-
-  winner.rating += Math.round(winnerGain);
-  loser.rating -= Math.round(loserLoss);
-
-  console.log(winner.name, winnerOldRating, '+', winnerGain, '=', winner.rating);
-  console.log(loser.name, loserOldRating, '-', loserLoss, '=', loser.rating);
-
-  winner.matches++;
-  loser.matches++;
-
-  return {
-    winnerGain: winnerGain,
-    loserGain: -loserLoss
-  }
+  return { winnerGain, loserGain };
 }
 
 function probabilityOfWinning(p1, p2) {
-  var ratingDiff = p1.rating - p2.rating;
-  var probability = 1 / (1 + Math.pow(10, -ratingDiff/500));
-  console.log('probability', p1.name, 'win over', p2.name, '=', probability);
+  const diff = p1.rating - p2.rating;
+  const probability = 1 / (1 + Math.pow(10, -diff/500));
+
+  const pretty = Math.round(probability*1000)/10;
+  console.log('probability %s win over %s = %d%%', p1.username, p2.username, pretty);
+
   return probability;
 }
 
