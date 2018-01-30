@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../img/penguin.png';
+import logo from '../img/pingwin.png';
 import Highscore from './Highscore.jsx';
 
 export default class App extends React.Component {
