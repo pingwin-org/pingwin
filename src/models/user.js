@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    default: 1000
+    default: 1600
   },
   matches: {
     type: Number,
