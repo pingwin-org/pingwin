@@ -44,6 +44,9 @@ matches.post('/', async function (req, res) {
       return;
     }
 
+    delete newMatch.player1.pin;
+    delete newMatch.player2.pin;
+
     newMatch.player1.rating = player1.rating;
     newMatch.player2.rating = player2.rating;
 
@@ -64,8 +67,8 @@ matches.post('/', async function (req, res) {
     winner.wins++;
     loser.losses++;
 
-    //newMatch.player1.ratingGain = what
-    //newMatch.player2.ratingGain = what
+    newMatch.player1.ratingGain = player1.rating - newMatch.player1.rating;
+    newMatch.player2.ratingGain = player2.rating - newMatch.player2.rating;
 
     await player1.save();
     await player2.save();
