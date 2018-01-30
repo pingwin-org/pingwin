@@ -1,28 +1,33 @@
 'use strict';
+
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const MatchSchema = new mongoose.Schema({
   player1: {
-    type: ObjectId,
-    ref: 'User',
-    required: true
+    username: {
+      type: String,
+      required: true
+    },
+    rating: Number,
+    ratingGain: Number
   },
   player2: {
-    type: ObjectId,
-    ref: 'User',
-    required: true
+    username: {
+      type: String,
+      required: true
+    },
+    rating: Number,
+    ratingGain: Number
   },
-  date: Date,
+  date: {
+    type: Date,
+    default: Date.now()
+  },
   winner: {
-    type: ObjectId,
-    ref: 'User',
+    type: String,
     required: true
-  },
-  player1rating: Number,
-  player2rating: Number,
-  player1ratingChange: Number,
-  player2ratingChange: Number,
+  }
 });
 
 module.exports = mongoose.model('Match', MatchSchema);
