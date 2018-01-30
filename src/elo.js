@@ -1,24 +1,10 @@
 'use strict';
 
+// TODO: clean up
+// TODO: better maths
+
+// replace with k-value
 const stake = 10;
-
-var p1 = {
-  name: 'p1',
-  rating: 1000,
-  matches: 0
-}
-
-var p2 = {
-  name: 'p2',
-  rating: 1000,
-  matches: 0
-}
-
-var p3 = {
-  name: 'p3',
-  rating: 1000,
-  matches: 0
-}
 
 function match(winner, loser) {
   console.log();
@@ -38,6 +24,11 @@ function match(winner, loser) {
 
   winner.matches++;
   loser.matches++;
+
+  return {
+    winnerGain: winnerGain,
+    loserGain: -loserLoss
+  }
 }
 
 function probabilityOfWinning(p1, p2) {
@@ -55,17 +46,4 @@ function boost(p) {
   }
 }
 
-
-match(p1, p2);
-match(p2, p1);
-match(p1, p2);
-match(p2, p1);
-match(p1, p2);
-
-match(p1, p3);
-
-match(p1, p2);
-match(p2, p1);
-match(p1, p2);
-match(p2, p1);
-match(p1, p2);
+module.exports = match;

@@ -1,3 +1,5 @@
+'use strict';
+
 const users = require('express').Router();
 const User = require('mongoose').model('User');
 
