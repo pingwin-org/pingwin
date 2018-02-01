@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 
 export default class AddUser extends React.Component {
   render () {
@@ -15,7 +16,7 @@ export default class AddUser extends React.Component {
             <label>Pin</label>
             <input type="password" ref="pin" />
           </div>
-          <input type="submit" value="Submit" />
+          <Button type='submit' value='Submit'>Submit</Button>
         </form>
       </div>);
   }
@@ -35,4 +36,3 @@ export default class AddUser extends React.Component {
     });
   }
 }
-

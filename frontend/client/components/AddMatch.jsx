@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 
 export default class AddMatch extends React.Component {
   render () {
@@ -33,7 +34,7 @@ export default class AddMatch extends React.Component {
               </div>
             </div>
           </div>
-          <input type='submit' value='Submit' />
+          <Button type='submit' value='Submit'>Submit</Button>
         </form>
       </div>);
   }
