@@ -28,12 +28,12 @@ matches.post('/', async function (req, res) {
       return;
     }
 
-    if (player1.pin !== newMatch.player1.pin) {
+    if ('' + player1.pin !== newMatch.player1.pin) {
       res.status(400).send('Incorrect pin for Player 1');
       return;
     }
 
-    if (player2.pin !== newMatch.player2.pin) {
+    if ('' + player2.pin !== newMatch.player2.pin) {
       res.status(400).send('Incorrect pin for Player 2');
       return;
     }
