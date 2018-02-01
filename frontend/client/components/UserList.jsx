@@ -12,7 +12,7 @@ export default class UserList extends React.Component {
     let userList;
     if (this.state.users) {
       const listItems = this.state.users.map(user => {
-        return <li key={user._id}>{user.username} ({user.rating} rating)</li>;
+        return <li key={user._id}>{user.username} | {user.rating} rating | {user.matches} matches | {user.wins} wins | {user.losses} losses</li>;
       });
       userList = <ol>{listItems}</ol>;
     }
