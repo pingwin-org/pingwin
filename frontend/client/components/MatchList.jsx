@@ -33,7 +33,7 @@ export default class MatchList extends React.Component {
     })
     .then(response => {
       this.setState({matches: response.data.sort((a, b) => {
-        return a.date > b.date;
+        return b.date > a.date;
       })});
     })
     .catch(err => {
