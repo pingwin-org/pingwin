@@ -3,6 +3,12 @@ import axios from 'axios';
 import { Button } from 'react-bootstrap';
 
 export default class AddUser extends React.Component {
+  constructor () {
+    super();
+    this.state = {
+      error: null
+    };
+  }
   render () {
     return (
       <div>
@@ -18,6 +24,9 @@ export default class AddUser extends React.Component {
           </div>
           <Button type='submit' value='Submit'>Submit</Button>
         </form>
+        <font color="red">
+          {this.state.error && this.state.error.toString()}
+        </font>
       </div>);
   }
   handleSubmit(e) {
@@ -28,10 +37,16 @@ export default class AddUser extends React.Component {
       username: this.refs.username.value,
       pin: this.refs.pin.value
     })
-    .then(function (response) {
+    .then((response) => {
+      this.setState({error: null});
       console.log(response);
     })
-    .catch(function (error) {
+    .catch((error) => {
+      if (error.response || error.response.data) {
+        this.setState({error: error.response.data});
+      } else {
+        this.setState({error});
+      }
       console.log(error);
     });
   }
