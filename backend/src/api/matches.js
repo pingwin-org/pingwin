@@ -28,6 +28,11 @@ matches.post('/', async function (req, res) {
       return;
     }
 
+    if (player1.username === player2.username) {
+      res.status(400).send('Player 1 and 2 can\'t be same');
+      return;
+    }
+
     if ('' + player1.pin !== newMatch.player1.pin) {
       res.status(400).send('Incorrect pin for Player 1');
       return;
