@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-export default class Highscore extends React.Component {
+export default class AddUser extends React.Component {
   render () {
     return (
       <div>
