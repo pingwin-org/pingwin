@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-export default class Highscore extends React.Component {
+export default class UserList extends React.Component {
   constructor () {
     super();
     this.state = {
@@ -18,7 +18,7 @@ export default class Highscore extends React.Component {
     }
     return (
       <div>
-        <h2>Higscore</h2>
+        <h2>Users</h2>
         {userList || 'loading users...'}
       </div>);
   }
