@@ -10,11 +10,11 @@ curl -sS -H "Content-Type: application/json" -X POST localhost:3000/api/matches 
 {
   "player1": {
     "username": "$1",
-    "pin": $2
+    "pin": "$2"
   },
   "player2": {
     "username": "$3",
-    "pin": $4
+    "pin": "$4"
   },
   "winner": "$5"
 }
