@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Table } from 'react-bootstrap';
 
 export default class MatchList extends React.Component {
   constructor () {
@@ -11,27 +12,36 @@ export default class MatchList extends React.Component {
   renderRatingGain (ratingGain) {
     const gain = ratingGain >= 0;
     return (<font color={gain ? "green" : "red"}>
-      {gain ? "+" : "-"} {Math.abs(ratingGain)}
+      {gain ? "+" : "-"}{Math.abs(ratingGain)}
     </font>);
   }
   render () {
-    let matchList;
+    let matchTable;
     if (this.state.matches) {
-      const listItems = this.state.matches.map(match => {
-        return <li key={match._id}>
-          {match.date}<br />
-          {match.player1.username} {match.player1.rating} {this.renderRatingGain(match.player1.ratingGain)}<br />
-          {match.player2.username} {match.player2.rating} {this.renderRatingGain(match.player2.ratingGain)}<br />
-          Winner: {match.winner}<br />
-        </li>;
+      matchTable = this.state.matches.map(match => {
+        const winner = match.player1.username === match.winner ? match.player1 : match.player2;
+        const loser = match.player1.username === match.winner ? match.player2 : match.player1;
+        return <tr key={match._id}>
+            <td>{new Date(match.date).toLocaleString()}</td>
+            <td>{winner.username} ({winner.rating})</td>
+            <td>{this.renderRatingGain(winner.ratingGain)}</td>
+            <td>{loser.username} ({loser.rating})</td>
+            <td>{this.renderRatingGain(loser.ratingGain)}</td>
+          </tr>;
       });
-      matchList = <ol>{listItems}</ol>;
     }
-    return (
-      <div>
-        <h2>Matches</h2>
-        {matchList || 'loading matches...'}
-      </div>);
+    return (<Table striped hover>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Winner</th>
+            <th>Gain</th>
+            <th>Loser</th>
+            <th>Loss</th>
+          </tr>
+        </thead>
+        {<tbody>{matchTable}</tbody> || 'loading users...'}
+      </Table>);
   }
   componentDidMount () {
     axios.get('http://localhost:3000/api/matches', {
@@ -47,4 +57,3 @@ export default class MatchList extends React.Component {
     });
   }
 }
-
