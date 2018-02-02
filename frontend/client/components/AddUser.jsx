@@ -14,7 +14,7 @@ export default class AddUser extends React.Component {
     return (
       <div>
         <Form inline onSubmit={this.handleSubmit.bind(this)}>
-          <FormGroup controlId="userform">
+          <FormGroup>
             <ControlLabel>Add User</ControlLabel>{' '}
             <FormControl type="text" placeholder="Username" ref="username"/>
             <FormControl type="password" placeholder="Pin" ref="pin"/>
