@@ -8,14 +8,20 @@ export default class MatchList extends React.Component {
       matches: null
     };
   }
+  renderRatingGain (ratingGain) {
+    const gain = ratingGain >= 0;
+    return (<font color={gain ? "green" : "red"}>
+      {gain ? "+" : "-"} {Math.abs(ratingGain)}
+    </font>);
+  }
   render () {
     let matchList;
     if (this.state.matches) {
       const listItems = this.state.matches.map(match => {
         return <li key={match._id}>
           {match.date}<br />
-          {match.player1.username} {match.player1.rating} + {match.player1.ratingGain}<br />
-          {match.player2.username} {match.player2.rating} + {match.player2.ratingGain}<br />
+          {match.player1.username} {match.player1.rating} {this.renderRatingGain(match.player1.ratingGain)}<br />
+          {match.player2.username} {match.player2.rating} {this.renderRatingGain(match.player2.ratingGain)}<br />
           Winner: {match.winner}<br />
         </li>;
       });
