@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Table } from 'react-bootstrap';
 
 export default class UserList extends React.Component {
   constructor () {
@@ -9,18 +10,33 @@ export default class UserList extends React.Component {
     };
   }
   render () {
-    let userList;
+    let userTable;
     if (this.state.users) {
-      const listItems = this.state.users.map(user => {
-        return <li key={user._id}>{user.username} | {user.rating} rating | {user.matches} matches | {user.wins} wins | {user.losses} losses</li>;
+      userTable = this.state.users.map((user, i) => {
+        console.log('row');
+        return <tr key={user._id}>
+            <td>{i + 1}</td>
+            <td>{user.username}</td>
+            <td>{user.rating}</td>
+            <td>{user.matches}</td>
+            <td>{user.wins}</td>
+            <td>{user.losses}</td>
+          </tr>;
       });
-      userList = <ol>{listItems}</ol>;
     }
-    return (
-      <div>
-        <h2>Users</h2>
-        {userList || 'loading users...'}
-      </div>);
+    return (<div><Table striped hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>Rating</th>
+            <th>Matches</th>
+            <th>Wins</th>
+            <th>Losses</th>
+          </tr>
+        </thead>
+        {<tbody>{userTable}</tbody> || 'loading users...'}
+      </Table></div>);
   }
   componentDidMount () {
     axios.get('http://localhost:3000/api/users', {
