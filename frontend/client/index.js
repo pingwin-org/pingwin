@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
-import 'bootstrap/dist/css/bootstrap.css';
-import './css/App.css';
+import './scss/main.scss';
+import penguin from './img/penguin.png';
+import Favicon from 'react-favicon';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <div>
+    <Favicon url={penguin} />
+    <App />
+  </div>
+  , document.getElementById('root'));
