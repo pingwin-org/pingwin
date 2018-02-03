@@ -1,42 +1,34 @@
 import React from 'react';
 import penguin from '../img/penguin.png';
-import pingwin from '../img/pingwin.png';
 import racket from '../img/racket.png';
-import rackets from '../img/rackets.png';
 import UserList from './UserList.jsx';
 import MatchList from './MatchList.jsx';
 import AddUser from './AddUser.jsx';
 import AddMatch from './AddMatch.jsx';
-import { Well, Grid } from 'react-bootstrap';
+import { Grid, Row, Col, Image } from 'react-bootstrap';
 
 export default class App extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      usersImg: penguin,
-      matchesImg: racket
-    };
-    this.usersHover = this.usersHover.bind(this);
-    this.matchesHover = this.matchesHover.bind(this);
-  }
-  usersHover (e) {
-    this.setState(prevState => ({
-      usersImg: prevState.usersImg === penguin ? pingwin : penguin
-    }));
-  }
-  matchesHover (e) {
-    this.setState(prevState => ({
-      matchesImg: this.state.matchesImg === racket ? rackets : racket
-    }));
-  }
   render () {
     return (
       <Grid>
-        <Well>
-          <h1>Hello Pingwinner!</h1>
-        </Well>
-        <img src={this.state.usersImg} onMouseEnter={this.usersHover} onMouseLeave={this.usersHover} height='200' width='200' />
-        <img src={this.state.matchesImg} onMouseEnter={this.matchesHover} onMouseLeave={this.matchesHover} height='200' width='200' />
+        <Grid>
+          <Row>
+            <Col className='container col-6 bg'>
+              <Image src={penguin} />
+              <div className='overlay'>
+                <h2>Users</h2>
+                <p>Check out the rating of all other pingwinners. And more imporantantly who's in the toplist.</p>
+              </div>
+            </Col>
+            <Col className='container col-6 bg'>
+              <Image src={racket} />
+              <div className='overlay'>
+                <h2>Play!</h2>
+                <p>Do you have another pingwinner to challenge in a game of table tennis?</p>
+              </div>
+            </Col>
+          </Row>
+        </Grid>
         <UserList />
         <AddUser />
         <MatchList />

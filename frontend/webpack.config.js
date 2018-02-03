@@ -35,6 +35,8 @@ module.exports = {
           }
         }, {
           loader: 'sass-loader'
+        }, {
+          loader: 'import-glob-loader' // Here is why: https://stackoverflow.com/questions/43283447/import-all-sass-file-within-directory-with-webpack
         }]}
     ]
   },
