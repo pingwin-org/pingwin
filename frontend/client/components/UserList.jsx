@@ -13,7 +13,6 @@ export default class UserList extends React.Component {
     let userTable;
     if (this.state.users) {
       userTable = this.state.users.map((user, i) => {
-        console.log('row');
         return <tr key={user._id}>
             <td>{i + 1}</td>
             <td>{user.username}</td>
