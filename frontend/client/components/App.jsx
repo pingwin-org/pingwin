@@ -5,18 +5,22 @@ import UserList from './UserList.jsx';
 import MatchList from './MatchList.jsx';
 import AddUser from './AddUser.jsx';
 import AddMatch from './AddMatch.jsx';
+import Footer from './Footer.jsx';
 import { Container } from 'reactstrap';
 
 export default class App extends React.Component {
   render () {
     return (
-      <Container>
+      <div>
         <Menu />
-        <Selector />
-        <UserList />
-        <AddUser />
-        <MatchList />
-        <AddMatch />
-      </Container>);
+        <Container>
+          <Selector />
+          <UserList />
+          {/* <AddUser /> */}
+          <MatchList />
+          <AddMatch />
+        </Container>
+        <Footer />
+      </div>);
   }
 }
