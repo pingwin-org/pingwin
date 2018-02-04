@@ -6,16 +6,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  NavLink } from 'reactstrap';
 
 export default class Menu extends React.Component {
   constructor (props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false
@@ -29,34 +24,20 @@ export default class Menu extends React.Component {
   render () {
     return (
       <div>
-        <Navbar color='faded' light expand='md'>
-          <NavbarBrand href='/'>reactstrap</NavbarBrand>
+        <Navbar color='faded' light expand='lg'>
+          <NavbarBrand href='/'>Pingwinner</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className='ml-auto' navbar>
               <NavItem>
-                <NavLink href='/components/'>Components</NavLink>
+                <NavLink disabled href='/game'>Play</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='https://github.com/reactstrap/reactstrap'>Github</NavLink>
+                <NavLink active href='/users'>Users</NavLink>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
-                </DropdownToggle>
-                <DropdownMenu >
-                  <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              <NavItem>
+                <NavLink href='/matches'>Matches</NavLink>
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
