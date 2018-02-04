@@ -31,8 +31,10 @@
     "morgan": "^1.9.0",
     "path": "^0.12.7",
     "react": "^16.2.0",
-    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
+    "react-favicon": "0.0.13",
+    "react-transition-group": "^2.2.1",
+    "reactstrap": "^5.0.0-beta",
     "style-loader": "^0.20.1",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
@@ -49,7 +51,6 @@
     "nodemon": "^1.14.11",
     "postcss-loader": "^2.1.0",
     "precss": "^3.1.0",
-    "react-favicon": "0.0.13",
     "sass-loader": "^6.0.6"
   }
 }

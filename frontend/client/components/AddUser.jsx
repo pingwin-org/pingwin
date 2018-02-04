@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { Form, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { Form, FormGroup, ControlLabel, FormControl, Button } from 'reactstrap';
 
 export default class AddUser extends React.Component {
   constructor () {
