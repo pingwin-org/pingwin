@@ -7,7 +7,7 @@ export default class Footer extends React.Component {
     return (
       <footer>
         <Card>
-          <CardFooter style={{'text-align': 'center'}}>
+          <CardFooter style={{'textAlign': 'center'}}>
             <p>
               <a href='https://github.com/DOhlsson/pingwin'>
                 <img src={git} /> All your stars are belong to us!
