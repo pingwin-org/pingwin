@@ -16,7 +16,7 @@ export default class App extends React.Component {
         <Container>
           <Selector />
           <UserList />
-          {/* <AddUser /> */}
+          <AddUser />
           <MatchList />
           <AddMatch />
         </Container>

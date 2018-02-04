@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { Form, FormGroup, ControlLabel, FormControl, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 export default class AddUser extends React.Component {
   constructor () {
@@ -15,9 +15,9 @@ export default class AddUser extends React.Component {
       <div>
         <Form inline onSubmit={this.handleSubmit.bind(this)}>
           <FormGroup>
-            <ControlLabel>Add User</ControlLabel>{' '}
-            <FormControl type="text" placeholder="Username" ref="username"/>
-            <FormControl type="password" placeholder="Pin" ref="pin"/>
+            <Label>Add User</Label>{' '}
+            <Input type="text" placeholder="Username" ref="username"/>
+            <Input type="password" placeholder="Pin" ref="pin"/>
             <Button type="submit" value="Submit">Submit</Button>
           </FormGroup>
         </Form>
