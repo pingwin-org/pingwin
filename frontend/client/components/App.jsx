@@ -5,18 +5,18 @@ import UserList from './UserList.jsx';
 import MatchList from './MatchList.jsx';
 import AddUser from './AddUser.jsx';
 import AddMatch from './AddMatch.jsx';
-import { Grid } from 'react-bootstrap';
+import { Container } from 'reactstrap';
 
 export default class App extends React.Component {
   render () {
     return (
-      <Grid>
+      <Container>
         <Menu />
         <Selector />
         <UserList />
         <AddUser />
         <MatchList />
         <AddMatch />
-      </Grid>);
+      </Container>);
   }
 }

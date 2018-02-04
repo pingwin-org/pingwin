@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Table } from 'react-bootstrap';
+import { Table } from 'reactstrap';
 
 export default class MatchList extends React.Component {
   constructor () {

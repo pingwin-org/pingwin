@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
+import { Button } from 'reactstrap';
 
 export default class AddMatch extends React.Component {
   constructor () {
