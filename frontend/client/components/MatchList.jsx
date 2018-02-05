@@ -49,7 +49,9 @@ export default class MatchList extends React.Component {
     })
     .then(response => {
       this.setState({matches: response.data.sort((a, b) => {
-        return b.date > a.date;
+        const aDate = new Date(a.date);
+        const bDate = new Date(b.date);
+        return bDate > aDate;
       })});
     })
     .catch(err => {
