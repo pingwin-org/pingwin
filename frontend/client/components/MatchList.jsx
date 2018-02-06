@@ -22,7 +22,7 @@ export default class MatchList extends React.Component {
         const winner = match.player1.username === match.winner ? match.player1 : match.player2;
         const loser = match.player1.username === match.winner ? match.player2 : match.player1;
         return <tr key={match._id}>
-            <td>{new Date(match.date).toLocaleString()}</td>
+            <td>{new Date(match.date).toISOString()}</td>
             <td>{winner.username} ({winner.rating})</td>
             <td>{this.renderRatingGain(winner.ratingGain)}</td>
             <td>{loser.username} ({loser.rating})</td>
