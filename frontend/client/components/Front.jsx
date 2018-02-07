@@ -3,7 +3,7 @@ import penguin from '../img/penguin.png';
 import racket from '../img/racket.png';
 import { Container, Row, Col } from 'reactstrap';
 
-export default class Selector extends React.Component {
+export default class Front extends React.Component {
   render () {
     return (
       <Container>
