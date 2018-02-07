@@ -1,26 +1,23 @@
 import React from 'react';
-import Menu from './Menu.jsx';
-import Selector from './Selector.jsx';
-import UserList from './UserList.jsx';
-import MatchList from './MatchList.jsx';
-import AddUser from './AddUser.jsx';
-import AddMatch from './AddMatch.jsx';
-import Footer from './Footer.jsx';
-import { Container } from 'reactstrap';
+import { Route } from 'react-router';
+import Favicon from 'react-favicon';
+
+import penguin from '../img/penguin.png';
+import Front from './Front.jsx';
+import Matches from './Matches.jsx';
+import Users from './Users.jsx';
+import Dev from './Dev.jsx';
 
 export default class App extends React.Component {
   render () {
     return (
       <div>
-        <Menu />
-        <Container>
-          <Selector />
-          <UserList />
-          <AddUser />
-          <MatchList />
-          <AddMatch />
-        </Container>
-        <Footer />
+        <Favicon url={penguin} />
+        <Route path='/front' component={Front} />
+        <Route path='/matches' component={Matches} />
+        <Route path='/users' component={Users} />
+        <Route path='/temp-dev' component={Dev} />
+        <a href='/temp-dev'>DEV</a>
       </div>);
   }
 }
