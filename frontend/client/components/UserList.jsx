@@ -17,9 +17,8 @@ export default class UserList extends React.Component {
             <td>{i + 1}</td>
             <td>{user.username}</td>
             <td>{user.rating}</td>
-            <td>{user.matches}</td>
             <td>{user.wins}</td>
-            <td>{user.losses}</td>
+            <td>{user.losses === 0 ? 'Yes' : 'No'}</td>
           </tr>;
       });
     }
@@ -29,9 +28,8 @@ export default class UserList extends React.Component {
             <th>#</th>
             <th>Username</th>
             <th>Rating</th>
-            <th>Matches</th>
             <th>Wins</th>
-            <th>Losses</th>
+            <th>Undefeated</th>
           </tr>
         </thead>
         {<tbody>{userTable}</tbody> || 'loading users...'}
