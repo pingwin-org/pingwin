@@ -17,7 +17,7 @@ export default class App extends React.Component {
         <Route path='/matches' component={Matches} />
         <Route path='/users' component={Users} />
         <Route path='/temp-dev' component={Dev} />
-        <a href='/temp-dev'>DEV</a>
+        <a href='/temp-dev'>CLICK ME</a>
       </div>);
   }
 }
