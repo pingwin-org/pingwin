@@ -1,13 +1,22 @@
 import React from 'react';
 import axios from 'axios';
-import { Button } from 'reactstrap';
+import { Alert, Button } from 'reactstrap';
 
 export default class AddMatch extends React.Component {
   constructor () {
     super();
     this.state = {
-      error: null
+      status: null
     };
+  }
+  statusBox() {
+    if (this.state.status === 'OK') {
+      return (<Alert color='info'>OK</Alert>);
+    } else if (typeof this.state.status === 'string') {
+      return (<Alert color='warning'>{this.state.status}</Alert>);
+    } else {
+      return null;
+    }
   }
   render () {
     return (
@@ -42,9 +51,7 @@ export default class AddMatch extends React.Component {
           </div>
           <Button type='submit' value='Submit'>Submit</Button>
         </form>
-        <font color="red">
-          {this.state.error && this.state.error.toString()}
-        </font>
+        {this.statusBox()}
       </div>);
   }
   handleSubmit (e) {
@@ -63,17 +70,20 @@ export default class AddMatch extends React.Component {
     console.log(obj);
     axios.post('http://localhost:3000/api/matches', obj)
     .then((response) => {
-      this.setState({error: null});
+      this.setState({status: "OK"});
+      this.refs.pin1.value = null;
+      this.refs.pin2.value = null;
       console.log(response);
     })
     .catch((error) => {
       if (error.response || error.response.data) {
-        this.setState({error: error.response.data});
+        this.setState({status: error.response.data});
       } else {
-        this.setState({error});
+        this.setState({status: error});
       }
       console.log(error);
       window.scrollTo(0, document.body.scrollHeight); // scroll down to display error
     });
   }
 }
+
