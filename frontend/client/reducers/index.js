@@ -1,9 +1,9 @@
 import users from './users';
 import matches from './matches';
 
-const reducers = [
+const reducers = {
   users,
   matches
-];
+};
 
 export default reducers;

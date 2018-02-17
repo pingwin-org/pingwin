@@ -6,7 +6,7 @@ import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 
-import {fetchUsers} from './actions';
+import { fetchUsers, fetchMatches } from './actions';
 import reducers from './reducers';
 import App from './components/App.jsx';
 import './scss/main.scss';
@@ -14,7 +14,8 @@ import './scss/main.scss';
 const history = createHistory();
 const store = createStore(
   combineReducers({
-    ...reducers,
+    user: reducers.users,
+    match: reducers.matches,
     router: routerReducer
   }),
   applyMiddleware(
@@ -23,6 +24,11 @@ const store = createStore(
   )
 );
 
+console.log('store', store.getState());
+
+store.dispatch(fetchUsers());
+store.dispatch(fetchMatches());
+
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
@@ -30,5 +36,3 @@ ReactDOM.render(
     </ConnectedRouter>
   </Provider>
   , document.getElementById('root'));
-
-store.dispatch(fetchUsers());

@@ -45,8 +45,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const mapStateToProps = (state) => {
-  // why is state an array?
-  return {error: state[0].addUserError}
+  return {error: state.user.addUserError}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddUser);
