@@ -24,8 +24,6 @@ const store = createStore(
   )
 );
 
-console.log('store', store.getState());
-
 store.dispatch(fetchUsers());
 store.dispatch(fetchMatches());
 
