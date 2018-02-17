@@ -1,5 +1,4 @@
 const users = (state = {}, action) => {
-  console.log('user reducer', state, action);
   switch(action.type) {
     case 'FETCH_USERS':
       return Object.assign({}, state, {
@@ -18,7 +17,20 @@ const users = (state = {}, action) => {
         fetchUsersError: action.error
       });
     case 'ADD_USER':
-      return state;
+      return Object.assign({}, state, {
+        addingUser: true,
+        addUserError: null
+      });
+    case 'ADD_USER_SUCCESS':
+      return Object.assign({}, state, {
+        addingUser: false,
+        addUserError: null
+      });
+    case 'ADD_USER_ERROR':
+      return Object.assign({}, state, {
+        addingUser: false,
+        addUserError: action.error
+      });
     default:
       return state;
   }
