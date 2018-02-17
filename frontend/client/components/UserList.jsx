@@ -32,8 +32,7 @@ class UserList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  // why is state an array?
-  return {users: state[0].users}
+  return {users: state.user.users}
 };
 
 export default connect(mapStateToProps)(UserList);
