@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios'; // TODO remove
 import { Table } from 'reactstrap';
 import { connect } from 'react-redux'
 
