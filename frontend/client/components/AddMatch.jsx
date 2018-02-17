@@ -1,15 +1,34 @@
 import React from 'react';
 import axios from 'axios';
-import { Alert, Button } from 'reactstrap';
+import Menu from './Menu.jsx';
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Alert,
+  Button } from 'reactstrap';
 
 export default class AddMatch extends React.Component {
   constructor () {
     super();
     this.state = {
-      status: null
+      status: null,
+      form: {
+        username1: '',
+        pin1: '',
+        username2: '',
+        pin2: '',
+        winner: ''
+      }
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  statusBox() {
+  statusBox () {
     if (this.state.status === 'OK') {
       return (<Alert color='info'>OK</Alert>);
     } else if (typeof this.state.status === 'string') {
@@ -21,56 +40,75 @@ export default class AddMatch extends React.Component {
   render () {
     return (
       <div>
-        <h3>Add Match</h3>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <div>
-            <label>Player 1</label>
-            <div>
-              <label>Username</label>
-              <input type='text' ref='username1' />
-            </div>
-            <div>
-              <label>Pin</label>
-              <input type='password' ref='pin1' />
-            </div>
-            <div>
-              <label>Player 2</label>
-              <div>
-                <label>Username</label>
-                <input type='text' ref='username2' />
-              </div>
-              <div>
-                <label>Pin</label>
-                <input type='password' ref='pin2' />
-              </div>
-              <div>
-                <label>Winner:</label><br />
-                <input type='text' ref='winner' />
-              </div>
-            </div>
-          </div>
-          <Button type='submit' value='Submit'>Submit</Button>
-        </form>
-        {this.statusBox()}
-      </div>);
+        <Menu />
+        <Container>
+          <h3 style={{'textAlign': 'center'}} >Add Match</h3>
+          <Form onSubmit={this.handleSubmit}>
+            <Row>
+              <Col>
+                <FormGroup>
+                  <Label>Player 1</Label>
+                  <Input type='text' name='username1' value={this.state.form.username1} onChange={this.handleChange} />
+                </FormGroup>
+                <FormGroup>
+                  <Label>Pin</Label>
+                  <Input type='password' name='pin1' value={this.state.form.pin1} onChange={this.handleChange} />
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup>
+                  <Label>Player 2</Label>
+                  <Input type='text' name='username2' value={this.state.form.username2} onChange={this.handleChange} />
+                </FormGroup>
+                <FormGroup>
+                  <Label>Pin</Label>
+                  <Input type='password' name='pin2' value={this.state.form.pin2} onChange={this.handleChange} />
+                </FormGroup>
+              </Col>
+            </Row>
+            <FormGroup>
+              <Label>
+                Winner
+              </Label>
+              <Input type='select' name='winner' onChange={this.handleChange}>
+                <option value={''}>Select a winner</option>
+                <option value={this.state.form.username1}>{this.state.form.username1}</option>
+                <option value={this.state.form.username2}>{this.state.form.username2}</option>
+              </Input>
+            </FormGroup>
+            <Button type='submit' value='Submit'>Submit</Button>
+          </Form>
+          {this.statusBox()}
+        </Container>
+      </div>
+    );
   }
-  handleSubmit (e) {
-    e.preventDefault();
-    let obj = {
+  handleChange (event) {
+    this.setState({
+      form: {
+        ...this.state.form,
+        [event.target.name]: event.target.value
+      }
+    });
+  }
+  handleSubmit (event) {
+    event.preventDefault();
+    const f = this.state.form;
+    const matchObj = {
       player1: {
-        username: this.refs.username1.value,
-        pin: this.refs.pin1.value
+        username: f.username1,
+        pin: f.pin1
       },
       player2: {
-        username: this.refs.username2.value,
-        pin: this.refs.pin2.value
+        username: f.username2,
+        pin: f.pin2
       },
-      winner: this.refs.winner.value
+      winner: f.winner
     };
-    console.log(obj);
-    axios.post('http://localhost:3000/api/matches', obj)
+    console.log(matchObj);
+    axios.post('http://localhost:3000/api/matches', matchObj)
     .then((response) => {
-      this.setState({status: "OK"});
+      this.setState({status: 'OK'});
       this.refs.pin1.value = null;
       this.refs.pin2.value = null;
       console.log(response);
@@ -86,4 +124,3 @@ export default class AddMatch extends React.Component {
     });
   }
 }
-
