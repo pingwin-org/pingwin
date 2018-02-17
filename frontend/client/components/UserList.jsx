@@ -1,18 +1,13 @@
 import React from 'react';
 import axios from 'axios'; // TODO remove
 import { Table } from 'reactstrap';
+import { connect } from 'react-redux'
 
-export default class UserList extends React.Component {
-  constructor () {
-    super();
-    this.state = {
-      users: null
-    };
-  }
+class UserList extends React.Component {
   render () {
     let userTable;
-    if (this.state.users) {
-      userTable = this.state.users.map((user, i) => {
+    if (this.props.users) {
+      userTable = this.props.users.map((user, i) => {
         return <tr key={user._id}>
             <td>{i + 1}</td>
             <td>{user.username}</td>
@@ -35,17 +30,11 @@ export default class UserList extends React.Component {
         {<tbody>{userTable}</tbody> || 'loading users...'}
       </Table></div>);
   }
-  componentDidMount () {
-    axios.get('http://localhost:3000/api/users', {
-      headers: { 'Access-Control-Allow-Origin': '*' }
-    })
-    .then(response => {
-      this.setState({users: response.data.sort((a, b) => {
-        return b.rating - a.rating;
-      })});
-    })
-    .catch(err => {
-      console.error(err);
-    });
-  }
 }
+
+const mapStateToProps = (state) => {
+  // why is state an array?
+  return {users: state[0].users}
+};
+
+export default connect(mapStateToProps)(UserList);
