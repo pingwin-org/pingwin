@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from 'axios'; // TODO remove
 import { Table } from 'reactstrap';
 
 export default class UserList extends React.Component {
