@@ -1,14 +1,8 @@
 import React from 'react';
-import axios from 'axios';
 import { Table } from 'reactstrap';
+import { connect } from 'react-redux'
 
-export default class MatchList extends React.Component {
-  constructor () {
-    super();
-    this.state = {
-      matches: null
-    };
-  }
+class MatchList extends React.Component {
   renderRatingGain (ratingGain) {
     const gain = ratingGain >= 0;
     return (<font color={gain ? "green" : "red"}>
@@ -17,8 +11,8 @@ export default class MatchList extends React.Component {
   }
   render () {
     let matchTable;
-    if (this.state.matches) {
-      matchTable = this.state.matches.map(match => {
+    if (this.props.matches) {
+      matchTable = this.props.matches.map(match => {
         const winner = match.player1.username === match.winner ? match.player1 : match.player2;
         const loser = match.player1.username === match.winner ? match.player2 : match.player1;
         return <tr key={match._id}>
@@ -40,22 +34,13 @@ export default class MatchList extends React.Component {
             <th>Loss</th>
           </tr>
         </thead>
-        {<tbody>{matchTable}</tbody> || 'loading users...'}
+        {<tbody>{matchTable}</tbody> || 'loading matches... this does not work haha'}
       </Table>);
   }
-  componentDidMount () {
-    axios.get('http://localhost:3000/api/matches', {
-      headers: { 'Access-Control-Allow-Origin': '*' }
-    })
-    .then(response => {
-      this.setState({matches: response.data.sort((a, b) => {
-        const aDate = new Date(a.date).getTime();
-        const bDate = new Date(b.date).getTime();
-        return bDate - aDate;
-      })});
-    })
-    .catch(err => {
-      console.error(err);
-    });
-  }
 }
+
+const mapStateToProps = (state) => {
+  return {matches: state.match.matches}
+};
+
+export default connect(mapStateToProps)(MatchList);
