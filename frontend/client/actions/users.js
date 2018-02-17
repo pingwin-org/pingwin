@@ -57,7 +57,7 @@ export function addUser(username, pin) {
       dispatch(addUserSuccess());
     }, (error) => {
       console.error(error);
-      if (error.response || error.response.data) {
+      if (error.response && error.response.data) {
         dispatch(addUserError(error.response.data));
       } else {
         dispatch(addUserError(error));
