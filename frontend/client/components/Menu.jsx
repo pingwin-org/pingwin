@@ -7,6 +7,7 @@ import {
   Nav,
   NavItem,
   NavLink } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export default class Menu extends React.Component {
   constructor (props) {
@@ -23,24 +24,22 @@ export default class Menu extends React.Component {
   }
   render () {
     return (
-      <div>
-        <Navbar color='faded' light expand='lg'>
-          <NavbarBrand href='/'>Pingwinner</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className='ml-auto' navbar>
-              <NavItem>
-                <NavLink disabled href='/game'>Play</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink active href='/users'>Users</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href='/matches'>Matches</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>);
+      <Navbar color='faded' light expand='lg'>
+        <NavbarBrand tag={Link} to='/'>Pingwinner</NavbarBrand>
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav className='ml-auto' navbar>
+            <NavItem>
+              <NavLink tag={Link} to='/play'>Play</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={Link} to='/users'>Users</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={Link} to='/matches'>Matches</NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>);
   }
 }
