@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
+import { connect } from 'react-redux'
+import { addUser } from '../actions'
 
-export default class AddUser extends React.Component {
-  constructor () {
-    super();
-    this.state = {
-      error: null
-    };
+class AddUser extends React.Component {
+  statusBox () {
+    if (this.props.error) {
+      return (<Alert color='warning'>{this.props.error}</Alert>);
+    } else {
+      return null;
+    }
   }
   render () {
     return (
@@ -21,28 +24,29 @@ export default class AddUser extends React.Component {
             <Button type="submit" value="Submit">Submit</Button>
           </FormGroup>
         </Form>
-        <font color="red">
-          {this.state.error && this.state.error.toString()}
-        </font>
+        {this.statusBox()}
       </div>);
   }
   handleSubmit(e) {
     e.preventDefault();
-    axios.post('http://localhost:3000/api/users', {
-      username: ReactDOM.findDOMNode(this.refs.username).value,
-      pin: ReactDOM.findDOMNode(this.refs.pin).value
-    })
-    .then((response) => {
-      this.setState({error: null});
-      console.log(response);
-    })
-    .catch((error) => {
-      if (error.response || error.response.data) {
-        this.setState({error: error.response.data});
-      } else {
-        this.setState({error});
-      }
-      console.log(error);
-    });
+    const username = ReactDOM.findDOMNode(this.refs.username).value;
+    const pin = ReactDOM.findDOMNode(this.refs.pin).value;
+    this.props.addUser(username, pin);
+    // TODO: clear input fields on ADD_USER_SUCCESS
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addUser: (username, pin) => {
+      return dispatch(addUser(username, pin));
+    }
+  }
+};
+
+const mapStateToProps = (state) => {
+  // why is state an array?
+  return {error: state[0].addUserError}
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddUser);
