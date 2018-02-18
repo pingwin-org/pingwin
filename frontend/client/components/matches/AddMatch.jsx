@@ -84,7 +84,7 @@ class AddMatch extends React.Component {
                 <option value={this.state.form.username2}>{this.state.form.username2}</option>
               </Input>
             </FormGroup>
-            <Button type='submit' value='Submit'>Submit</Button>
+            <Button type='submit' color='success' value='Submit'>Submit</Button>
           </Form>
           {this.statusBox(this.state.status)}
         </Container>
