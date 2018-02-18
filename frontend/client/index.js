@@ -6,6 +6,9 @@ import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 
+import { Provider as AlertProvider } from 'react-alert';
+import { Alert, options } from './components/Alert.jsx';
+
 import { fetchUsers, fetchMatches } from './actions';
 import reducers from './reducers';
 import App from './components/App.jsx';
@@ -29,8 +32,10 @@ store.dispatch(fetchMatches());
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
+    <AlertProvider template={Alert} {...options}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </AlertProvider>
   </Provider>
   , document.getElementById('root'));

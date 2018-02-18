@@ -1,8 +1,8 @@
 import React from 'react';
 import Menu from '../Menu.jsx';
 import Footer from '../Footer.jsx';
-import { connect } from 'react-redux'
-import { addMatch } from '../../actions'
+import { connect } from 'react-redux';
+import { addMatch } from '../../actions';
 import {
   Container,
   Row,
