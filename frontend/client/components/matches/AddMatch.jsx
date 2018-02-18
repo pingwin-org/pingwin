@@ -41,6 +41,7 @@ class AddMatch extends React.Component {
       return null;
     }
   }
+  // TODO: This should be its own Component
   playerInput (nbr) {
     const userString = 'username' + nbr;
     const pinString = 'pin' + nbr;
@@ -48,7 +49,12 @@ class AddMatch extends React.Component {
       <Col>
         <FormGroup>
           <Label>{'Player ' + nbr}</Label>
-          <Input type='text' name={userString} value={this.state.form[userString]} onChange={this.handleChange} />
+          <Input type='select' name={userString} value={this.state.form[userString]} onChange={this.handleChange}>
+            <option value={''}>Select player</option>
+            {this.props.users && this.props.users.map(user => {
+              return <option key={user._id} value={user.username}>{user.username}</option>
+            })}
+          </Input>
         </FormGroup>
         <FormGroup>
           <Label>Pin</Label>
