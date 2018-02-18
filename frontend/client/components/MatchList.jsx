@@ -15,8 +15,9 @@ class MatchList extends React.Component {
       matchTable = this.props.matches.map(match => {
         const winner = match.player1.username === match.winner ? match.player1 : match.player2;
         const loser = match.player1.username === match.winner ? match.player2 : match.player1;
+        const n = 'numeric';
         return <tr key={match._id}>
-            <td>{new Date(match.date).toISOString()}</td>
+            <td>{new Date(match.date).toLocaleString('en-GB', {hour12: false, day: n, month: n, hour: n, minute: n})}</td>
             <td>{winner.username} ({winner.rating})</td>
             <td>{this.renderRatingGain(winner.ratingGain)}</td>
             <td>{loser.username} ({loser.rating})</td>
