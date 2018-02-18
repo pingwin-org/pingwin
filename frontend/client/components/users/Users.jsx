@@ -1,5 +1,6 @@
 import React from 'react';
-import Menu from './Menu.jsx';
+import Menu from '../Menu.jsx';
+import Footer from '../Footer.jsx';
 import UserList from './UserList.jsx';
 import AddUser from './AddUser.jsx';
 import { Container } from 'reactstrap';
@@ -13,6 +14,7 @@ export default class Users extends React.Component {
           <UserList />
           <AddUser />
         </Container>
+        <Footer />
       </div>);
   }
 }
