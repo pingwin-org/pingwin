@@ -1,5 +1,5 @@
 import React from 'react';
-import git from '../img/github.png';
+import GitCat from 'react-icons/lib/io/social-github';
 import { Card, CardFooter } from 'reactstrap';
 
 export default class Footer extends React.Component {
@@ -8,14 +8,9 @@ export default class Footer extends React.Component {
       <footer>
         <Card>
           <CardFooter style={{'textAlign': 'center'}}>
-            <p>
-              <a href='https://github.com/DOhlsson/pingwin'>
-                <img
-                  style={{ height: '1.5em', width: 'auto' }}
-                  src={git}
-                /> All your stars are belong to us!
-              </a>
-            </p>
+            <a href='https://github.com/DOhlsson/pingwin'>
+              <GitCat /> All your stars are belong to us!
+            </a>
           </CardFooter>
         </Card>
       </footer>);
