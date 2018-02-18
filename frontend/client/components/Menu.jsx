@@ -7,7 +7,7 @@ import {
   Nav,
   NavItem,
   NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { NavLink as RRNavLink } from 'react-router-dom';
 
 export default class Menu extends React.Component {
   constructor (props) {
@@ -24,19 +24,19 @@ export default class Menu extends React.Component {
   }
   render () {
     return (
-      <Navbar style={{backgroundColor: '#ffbaba'}}className='fixed-top' light expand='lg'>
-        <NavbarBrand tag={Link} to='/'>Pingwinner</NavbarBrand>
+      <Navbar style={{backgroundColor: '#ffbaba'}}className='fixed-top' light expand='md'>
+        <NavbarBrand tag={RRNavLink} to='/'>Pingwinner</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav className='ml-auto' navbar>
+          <Nav className='ml-auto' navbar pills>
             <NavItem>
-              <NavLink tag={Link} to='/play'>Play</NavLink>
+              <NavLink tag={RRNavLink} to='/play'>Play</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to='/users'>Users</NavLink>
+              <NavLink tag={RRNavLink} to='/users'>Users</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to='/matches'>Matches</NavLink>
+              <NavLink tag={RRNavLink} to='/matches'>Matches</NavLink>
             </NavItem>
           </Nav>
         </Collapse>
