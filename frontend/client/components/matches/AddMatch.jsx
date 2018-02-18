@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Menu from '../Menu.jsx';
+import Footer from '../Footer.jsx';
 import {
   Container,
   Row,
@@ -77,6 +78,7 @@ export default class AddMatch extends React.Component {
           </Form>
           {this.statusBox(this.state.status)}
         </Container>
+      <Footer />
       </div>
     );
   }
