@@ -1,7 +1,8 @@
 import React from 'react';
-import axios from 'axios';
 import Menu from '../Menu.jsx';
 import Footer from '../Footer.jsx';
+import { connect } from 'react-redux'
+import { addMatch } from '../../actions'
 import {
   Container,
   Row,
@@ -13,11 +14,12 @@ import {
   Alert,
   Button } from 'reactstrap';
 
-export default class AddMatch extends React.Component {
+// TODO: Select from userlist
+
+class AddMatch extends React.Component {
   constructor () {
     super();
     this.state = {
-      status: null,
       form: {
         username1: '',
         pin1: '',
@@ -29,10 +31,12 @@ export default class AddMatch extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  statusBox (status) {
-    const color = status === 'OK' ? 'success' : 'warning';
-    if (color && typeof status === 'string') {
-      return (<Alert color={color}>{status}</Alert>);
+  statusBox () {
+    console.log('box', this.props);
+    if (this.props.addingMatch === false && this.props.error === null) {
+      return (<Alert color='info'>OK</Alert>);
+    } else if (this.props.error) {
+      return (<Alert color='warning'>{this.props.error}</Alert>);
     } else {
       return null;
     }
@@ -93,6 +97,7 @@ export default class AddMatch extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
     const f = this.state.form;
+    // TODO: just map form to this instead?
     const matchObj = {
       player1: {
         username: f.username1,
@@ -105,19 +110,27 @@ export default class AddMatch extends React.Component {
       winner: f.winner
     };
     console.log(matchObj);
-    axios.post('http://localhost:3000/api/matches', matchObj)
-    .then((response) => {
-      this.setState({status: 'OK'});
-      this.state.form.pin1 = '';
-      this.state.form.pin2 = '';
-      console.log(response);
-    })
-    .catch((error) => {
-      if (error.response && error.response.data) {
-        this.setState({status: error.response.data});
-      }
-      console.log(error);
-      window.scrollTo(0, document.body.scrollHeight); // scroll down to display error
-    });
+    this.props.addMatch(matchObj);
+    console.log('this.refs', this.refs);
+    // TODO: somehow clear pins on submit success
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMatch: (match) => {
+      return dispatch(addMatch(match));
+    }
+  }
+};
+
+const mapStateToProps = (state) => {
+  return {
+    users: state.user.users,
+    matches: state.match.matches,
+    error: state.match.addMatchError,
+    addingMatch: state.match.addingMatch
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddMatch);
