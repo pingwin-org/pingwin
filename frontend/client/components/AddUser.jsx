@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Plus from 'react-icons/lib/io/plus-round';
 import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 import { connect } from 'react-redux'
 import { addUser } from '../actions'
@@ -18,9 +19,9 @@ class AddUser extends React.Component {
         <Form inline onSubmit={this.handleSubmit.bind(this)}>
           <FormGroup>
             <Label>Add User</Label>{' '}
-            <Input type="text" placeholder="Username" ref="username"/>
-            <Input type="password" placeholder="Pin" ref="pin"/>
-            <Button type="submit" value="Submit">Submit</Button>
+            <Input type="text" placeholder="Username" ref="username" />
+            <Input type="password" placeholder="Pin" ref="pin" />
+            <Button type="submit" color="success" value="Submit"><Plus /></Button>
           </FormGroup>
         </Form>
         {this.statusBox()}
