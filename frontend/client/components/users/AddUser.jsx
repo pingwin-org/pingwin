@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Plus from 'react-icons/lib/io/plus-round';
 import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
-import { connect } from 'react-redux'
-import { addUser } from '../actions'
+import { connect } from 'react-redux';
+import { addUser } from '../../actions';
 
 class AddUser extends React.Component {
   statusBox () {
