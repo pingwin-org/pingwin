@@ -2,12 +2,16 @@ import React from 'react';
 import penguin from '../img/penguin.png';
 import racket from '../img/racket.png';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col } from 'reactstrap';
+import { withAlert } from 'react-alert';
+import { Container, Row, Col, Button } from 'reactstrap';
 
-export default class Front extends React.Component {
+class Front extends React.Component {
   render () {
     return (
       <Container>
+        <Button color='danger' onClick={() => {
+          this.props.alert.show('Oh look, an alert!');
+        }}>The Button</Button>
         <Row>
           <Col className='container col-6 bg'>
             <Link to='/users'>
@@ -31,3 +35,5 @@ export default class Front extends React.Component {
       </Container>);
   }
 }
+
+export default withAlert(Front);
