@@ -10,9 +10,10 @@ export default class Users extends React.Component {
     return (
       <div>
         <Menu />
-        <Container>
-          <UserList />
+        <Container >
           <AddUser />
+          <h3>Users</h3>
+          <UserList />
         </Container>
         <Footer />
       </div>);

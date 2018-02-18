@@ -24,7 +24,7 @@ export default class Menu extends React.Component {
   }
   render () {
     return (
-      <Navbar color='faded' light expand='lg'>
+      <Navbar style={{backgroundColor: '#ffbaba'}}className='fixed-top' light expand='lg'>
         <NavbarBrand tag={Link} to='/'>Pingwinner</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
