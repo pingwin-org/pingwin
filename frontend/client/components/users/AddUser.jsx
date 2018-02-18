@@ -33,6 +33,7 @@ class AddUser extends React.Component {
     const pin = ReactDOM.findDOMNode(this.refs.pin).value;
     this.props.addUser(username, pin);
     // TODO: clear input fields on ADD_USER_SUCCESS
+    // TODO: jump to user list on success
   }
 }
 

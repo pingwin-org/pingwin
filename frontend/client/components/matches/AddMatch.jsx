@@ -19,6 +19,7 @@ import {
 class AddMatch extends React.Component {
   constructor () {
     super();
+    // TODO: move this state into redux
     this.state = {
       form: {
         username1: '',
@@ -32,7 +33,6 @@ class AddMatch extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   statusBox () {
-    console.log('box', this.props);
     if (this.props.addingMatch === false && this.props.error === null) {
       return (<Alert color='info'>OK</Alert>);
     } else if (this.props.error) {
@@ -109,10 +109,11 @@ class AddMatch extends React.Component {
       },
       winner: f.winner
     };
-    console.log(matchObj);
     this.props.addMatch(matchObj);
-    console.log('this.refs', this.refs);
-    // TODO: somehow clear pins on submit success
+    // TODO: somehow clear pins on only submit success
+    // TODO: jump to match list on success
+    f.pin1 = '';
+    f.pin2 = '';
   }
 }
 
