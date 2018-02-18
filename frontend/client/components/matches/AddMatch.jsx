@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import Menu from './Menu.jsx';
+import Menu from '../Menu.jsx';
+import Footer from '../Footer.jsx';
 import {
   Container,
   Row,
@@ -28,14 +29,29 @@ export default class AddMatch extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  statusBox () {
-    if (this.state.status === 'OK') {
-      return (<Alert color='info'>OK</Alert>);
-    } else if (typeof this.state.status === 'string') {
-      return (<Alert color='warning'>{this.state.status}</Alert>);
+  statusBox (status) {
+    const color = status === 'OK' ? 'success' : 'warning';
+    if (color && typeof status === 'string') {
+      return (<Alert color={color}>{status}</Alert>);
     } else {
       return null;
     }
+  }
+  playerInput (nbr) {
+    const userString = 'username' + nbr;
+    const pinString = 'pin' + nbr;
+    return (
+      <Col>
+        <FormGroup>
+          <Label>{'Player ' + nbr}</Label>
+          <Input type='text' name={userString} value={this.state.form[userString]} onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup>
+          <Label>Pin</Label>
+          <Input type='password' name={pinString} value={this.state.form[pinString]} onChange={this.handleChange} />
+        </FormGroup>
+      </Col>
+    );
   }
   render () {
     return (
@@ -45,26 +61,8 @@ export default class AddMatch extends React.Component {
           <h3 style={{'textAlign': 'center'}} >Add Match</h3>
           <Form onSubmit={this.handleSubmit}>
             <Row>
-              <Col>
-                <FormGroup>
-                  <Label>Player 1</Label>
-                  <Input type='text' name='username1' value={this.state.form.username1} onChange={this.handleChange} />
-                </FormGroup>
-                <FormGroup>
-                  <Label>Pin</Label>
-                  <Input type='password' name='pin1' value={this.state.form.pin1} onChange={this.handleChange} />
-                </FormGroup>
-              </Col>
-              <Col>
-                <FormGroup>
-                  <Label>Player 2</Label>
-                  <Input type='text' name='username2' value={this.state.form.username2} onChange={this.handleChange} />
-                </FormGroup>
-                <FormGroup>
-                  <Label>Pin</Label>
-                  <Input type='password' name='pin2' value={this.state.form.pin2} onChange={this.handleChange} />
-                </FormGroup>
-              </Col>
+              {this.playerInput(1)}
+              {this.playerInput(2)}
             </Row>
             <FormGroup>
               <Label>
@@ -78,8 +76,9 @@ export default class AddMatch extends React.Component {
             </FormGroup>
             <Button type='submit' value='Submit'>Submit</Button>
           </Form>
-          {this.statusBox()}
+          {this.statusBox(this.state.status)}
         </Container>
+      <Footer />
       </div>
     );
   }
@@ -109,15 +108,13 @@ export default class AddMatch extends React.Component {
     axios.post('http://localhost:3000/api/matches', matchObj)
     .then((response) => {
       this.setState({status: 'OK'});
-      this.refs.pin1.value = null;
-      this.refs.pin2.value = null;
+      this.state.form.pin1 = '';
+      this.state.form.pin2 = '';
       console.log(response);
     })
     .catch((error) => {
-      if (error.response || error.response.data) {
+      if (error.response && error.response.data) {
         this.setState({status: error.response.data});
-      } else {
-        this.setState({status: error});
       }
       console.log(error);
       window.scrollTo(0, document.body.scrollHeight); // scroll down to display error

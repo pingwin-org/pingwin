@@ -4,9 +4,9 @@ import Favicon from 'react-favicon';
 
 import penguin from '../img/penguin.png';
 import Front from './Front.jsx';
-import AddMatch from './AddMatch.jsx';
-import Matches from './Matches.jsx';
-import Users from './Users.jsx';
+import AddMatch from './matches/AddMatch.jsx';
+import Matches from './matches/Matches.jsx';
+import Users from './users/Users.jsx';
 
 export default class App extends React.Component {
   render () {
