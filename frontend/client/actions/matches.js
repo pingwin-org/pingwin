@@ -1,20 +1,20 @@
 import axios from 'axios';
 
-function fetchMatchesSuccess(matches) {
+function fetchMatchesSuccess (matches) {
   return {
     type: 'FETCH_MATCHES_SUCCESS',
     matches
   }
 }
 
-function fetchMatchesError(error) {
+function fetchMatchesError (error) {
   return {
     type: 'FETCH_MATCHES_ERROR',
     error
   }
 }
 
-export function fetchMatches() {
+export function fetchMatches () {
   return function (dispatch) {
     dispatch({type: 'FETCH_MATCHES'});
     return axios.get('http://localhost:3000/api/matches', {
@@ -34,20 +34,20 @@ export function fetchMatches() {
   }
 }
 
-function addMatchSuccess(matches) {
+function addMatchSuccess (matches) {
   return {
     type: 'ADD_MATCH_SUCCESS'
   }
 }
 
-function addMatchError(error) {
+function addMatchError (error) {
   return {
     type: 'ADD_MATCH_ERROR',
     error
   }
 }
 
-export function addMatch(match) {
+export function addMatch (match) {
   return function (dispatch) {
     dispatch({type: 'ADD_MATCH'});
     return axios.post('http://localhost:3000/api/matches', match)
