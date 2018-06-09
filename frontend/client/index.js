@@ -15,7 +15,7 @@ import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 // react-alert (pop-up alerts for user feedback)
 import { Provider as AlertProvider } from 'react-alert';
-import { Alert, options } from './components/Alert.jsx';
+import { Alert, defaultOptions } from './components/Alert.jsx';
 
 const history = createHistory();
 const store = createStore(
@@ -35,7 +35,7 @@ store.dispatch(fetchMatches());
 
 ReactDOM.render(
   <Provider store={store}>
-    <AlertProvider template={Alert} {...options}>
+    <AlertProvider template={Alert} {...defaultOptions}>
       <ConnectedRouter history={history}>
         <App />
       </ConnectedRouter>
