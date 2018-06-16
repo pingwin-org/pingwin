@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node_modules/.bin/nodemon backend/src/index.js",
-    "watch": "webpack --config frontend/webpack.dev.js --progress --colors --watch"
+    "watch": "webpack --config frontend/webpack.dev.js --progress --colors --watch",
+    "build": "webpack --config frontend/webpack.production.js --progress --colors"
   },
   "repository": {
     "type": "git",
