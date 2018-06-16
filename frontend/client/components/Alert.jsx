@@ -11,11 +11,11 @@ export class Alert extends React.Component {
     // options contains all given options
     // message is the alert message
     // close is a function that closes the alert
-    const { color, options, message, close } = this.props;
-    const style = { 'maxWidth': '15em' };
+    const { style, options, message, close } = this.props;
+    const color = options.type === 'error' ? 'danger' : options.type;
 
     return (
-      <StrapAlert className='pt-0' style={style} color={color || 'info'} options={options}>
+      <StrapAlert className='pt-0' style={style} color={color} options={options}>
         <Row className='justify-content-end'>
           <button onClick={close} type='button' className='close'>
             <span>&times;</span>
@@ -34,7 +34,7 @@ export class Alert extends React.Component {
 export const defaultOptions = {
   position: 'top right',
   timeout: 10000,
-  offset: '30px',
+  offset: '10px',
   zIndex: 15000, // higher than navbar
   transition: 'scale'
 };
