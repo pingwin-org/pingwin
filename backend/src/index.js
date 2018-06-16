@@ -16,9 +16,6 @@ const socketio = require('./socket.io')
 
 mongoose.connect('mongodb://localhost/pingwin');
 
-// Serve static content from src/web
-//app.use(express.static('src/web'));
-
 // parse application/json
 app.use(bodyParser.json());
 
