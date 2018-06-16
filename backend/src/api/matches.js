@@ -33,24 +33,11 @@ matches.post('/', async function (req, res) {
       return;
     }
 
-    if ('' + player1.pin !== newMatch.player1.pin) {
-      res.status(400).send('Incorrect pin for Player 1');
-      return;
-    }
-
-    if ('' + player2.pin !== newMatch.player2.pin) {
-      res.status(400).send('Incorrect pin for Player 2');
-      return;
-    }
-
     if (newMatch.winner !== newMatch.player1.username &&
         newMatch.winner !== newMatch.player2.username) {
       res.status(400).send('Incorrect winner');
       return;
     }
-
-    delete newMatch.player1.pin;
-    delete newMatch.player2.pin;
 
     newMatch.player1.rating = player1.rating;
     newMatch.player2.rating = player2.rating;
