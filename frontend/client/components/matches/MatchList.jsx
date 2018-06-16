@@ -23,26 +23,26 @@ class MatchList extends React.Component {
         }
         const n = 'numeric';
         return <tr key={match._id}>
-            <td>{new Date(match.date ? match.date : match.createdAt).toLocaleString('en-GB', {hour12: false, day: n, month: n, hour: n, minute: n})}</td>
-            <td>{winner.username} ({winner.rating || winner.newRating})</td>
-            <td>{this.renderRatingGain(winner.ratingGain || winner.ratingDiff)}</td>
-            <td>{loser.username} ({loser.rating || loser.newRating})</td>
-            <td>{this.renderRatingGain(loser.ratingGain || loser.ratingDiff)}</td>
-          </tr>;
+          <td>{new Date(match.date ? match.date : match.createdAt).toLocaleString('en-GB', {hour12: false, day: n, month: n, hour: n, minute: n})}</td>
+          <td>{winner.username} ({winner.rating || winner.newRating})</td>
+          <td>{this.renderRatingGain(winner.ratingGain || winner.ratingDiff)}</td>
+          <td>{loser.username} ({loser.rating || loser.newRating})</td>
+          <td>{this.renderRatingGain(loser.ratingGain || loser.ratingDiff)}</td>
+        </tr>;
       });
     }
     return (<Table striped hover>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Winner</th>
-            <th>Gain</th>
-            <th>Loser</th>
-            <th>Loss</th>
-          </tr>
-        </thead>
-        {<tbody>{matchTable}</tbody> || 'loading matches... this does not work haha'}
-      </Table>);
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Winner</th>
+          <th>Gain</th>
+          <th>Loser</th>
+          <th>Loss</th>
+        </tr>
+      </thead>
+      {<tbody>{matchTable}</tbody> || 'loading matches... this does not work haha'}
+    </Table>);
   }
 }
 

@@ -27,7 +27,6 @@ class AddUser extends React.Component {
     // TODO: jump to user list on success
   }
   componentWillReceiveProps (newProps) {
-    console.log('====', newProps);
     if (newProps.userWasAdded !== this.props.userWasAdded && newProps.userWasAdded) {
       this.props.alert.success('User successfully added!');
     }

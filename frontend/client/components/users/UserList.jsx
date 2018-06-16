@@ -1,29 +1,35 @@
 import React from 'react';
 import { Table } from 'reactstrap';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 class UserList extends React.Component {
   render () {
+    const getWinrate = (wins, losses) => {
+      return wins ? Math.round(wins / losses * 100) / 100 : 0;
+    };
     let userTable;
     if (this.props.users) {
       userTable = this.props.users.map((user, i) => {
-        return <tr key={user._id}>
-            <td>{i + 1}</td>
-            <td>{user.username}</td>
-            <td>{user.rating}</td>
-            <td>{user.wins}</td>
-            <td>{user.losses === 0 ? 'Yes' : 'No'}</td>
-          </tr>;
+        return (<tr key={user._id}>
+          <td>{i + 1}</td>
+          <td>{user.username}</td>
+          <td>{user.rating}</td>
+          <td>{user.wins}</td>
+          <td>{user.losses}</td>
+          <td>{getWinrate(user.wins, user.losses)}</td>
+        </tr>);
       });
     }
-    return (<div><Table striped hover>
+    return (
+      <div><Table striped hover>
         <thead>
           <tr>
             <th>#</th>
             <th>Username</th>
             <th>Rating</th>
             <th>Wins</th>
-            <th>Undefeated</th>
+            <th>Losses</th>
+            <th>Winrate</th>
           </tr>
         </thead>
         {<tbody>{userTable}</tbody> || 'loading users...'}
@@ -32,7 +38,7 @@ class UserList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {users: state.user.users}
+  return {users: state.user.users};
 };
 
 export default connect(mapStateToProps)(UserList);
