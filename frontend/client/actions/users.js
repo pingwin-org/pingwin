@@ -45,12 +45,11 @@ function addUserError(error) {
   }
 }
 
-export function addUser(username, pin) {
+export function addUser (username) {
   return function (dispatch) {
     dispatch({type: 'ADD_USER'});
     return axios.post('http://localhost:3000/api/users', {
-      username,
-      pin
+      username
     })
     .then((response) => {
       dispatch(fetchUsers());

@@ -4,7 +4,7 @@ const users = require('express').Router();
 const User = require('mongoose').model('User');
 
 users.get('/', async function (req, res) {
-  const users = await User.find({}).select('-pin').exec();
+  const users = await User.find({}).exec();
   res.send(users);
 });
 
