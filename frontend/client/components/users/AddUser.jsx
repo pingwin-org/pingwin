@@ -23,13 +23,16 @@ class AddUser extends React.Component {
     e.preventDefault();
     const username = ReactDOM.findDOMNode(this.refs.username).value;
     this.props.addUser(username);
-    // this.props.alert.show(JSON.stringify(err));
     // TODO: clear input fields on ADD_USER_SUCCESS
     // TODO: jump to user list on success
   }
   componentWillReceiveProps (newProps) {
+    console.log('====', newProps);
     if (newProps.userWasAdded !== this.props.userWasAdded && newProps.userWasAdded) {
-      this.props.alert.show('User successfully added!');
+      this.props.alert.success('User successfully added!');
+    }
+    if (newProps.error !== this.props.error && newProps.error) {
+      this.props.alert.error(newProps.error, { color: 'danger' });
     }
   }
 }

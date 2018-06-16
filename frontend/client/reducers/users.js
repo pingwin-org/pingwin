@@ -1,5 +1,5 @@
 const users = (state = {}, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'FETCH_USERS':
       return Object.assign({}, state, {
         fetchingUsers: true,
@@ -30,6 +30,7 @@ const users = (state = {}, action) => {
       });
     case 'ADD_USER_ERROR':
       return Object.assign({}, state, {
+        userWasAdded: false,
         addingUser: false,
         addUserError: action.error
       });
