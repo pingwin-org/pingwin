@@ -52,7 +52,6 @@ export function addMatch (match) {
     dispatch({type: 'ADD_MATCH'});
     return axios.post('http://localhost:3000/api/matches', match)
     .then((response) => {
-      dispatch(fetchMatches());
       dispatch(addMatchSuccess());
     }, (error) => {
       console.error(error);

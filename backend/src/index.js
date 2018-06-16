@@ -11,6 +11,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const api = require('./api');
 const app = express();
+var server = require('http').Server(app);
+const socketio = require('./socket.io')
 
 mongoose.connect('mongodb://localhost/pingwin');
 
@@ -44,6 +46,9 @@ app.all('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../../dist/client/index.html'));
 });
 
-app.listen(3000, function () {
+server.listen(3000, function () {
   console.log('Listening on http://localhost:3000');
 });
+
+// Start socket.io
+socketio.init(server);
