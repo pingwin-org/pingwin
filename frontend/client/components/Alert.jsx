@@ -35,6 +35,6 @@ export const defaultOptions = {
   position: 'top right',
   timeout: 10000,
   offset: '30px',
-  zIndex: 15000 // higher than navbar
-  transition: 'scale',
+  zIndex: 15000, // higher than navbar
+  transition: 'scale'
 };
