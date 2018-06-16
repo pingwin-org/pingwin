@@ -20,7 +20,6 @@ class AddUser extends React.Component {
           <FormGroup>
             <Label>Add User</Label>{' '}
             <Input type="text" placeholder="Username" ref="username" />
-            <Input type="password" placeholder="Pin" ref="pin" />
             <Button type="submit" color="success" value="Submit"><Plus /></Button>
           </FormGroup>
         </Form>
@@ -30,8 +29,7 @@ class AddUser extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const username = ReactDOM.findDOMNode(this.refs.username).value;
-    const pin = ReactDOM.findDOMNode(this.refs.pin).value;
-    this.props.addUser(username, pin);
+    this.props.addUser(username);
     // TODO: clear input fields on ADD_USER_SUCCESS
     // TODO: jump to user list on success
   }
@@ -39,8 +37,8 @@ class AddUser extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addUser: (username, pin) => {
-      return dispatch(addUser(username, pin));
+    addUser: (username) => {
+      return dispatch(addUser(username));
     }
   }
 };
