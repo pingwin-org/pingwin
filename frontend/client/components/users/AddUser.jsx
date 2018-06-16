@@ -18,7 +18,7 @@ class AddUser extends React.Component {
       <div>
         <Form inline onSubmit={this.handleSubmit.bind(this)}>
           <FormGroup>
-            <Label>Add User</Label>{' '}
+            <Label id="addUserLabel">Add User</Label>{' '}
             <Input type="text" placeholder="Username" ref="username" />
             <Button type="submit" color="success" value="Submit"><Plus /></Button>
           </FormGroup>
