@@ -6,8 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node_modules/.bin/nodemon backend/src/index.js",
-    "start-be": "node_modules/.bin/nodemon backend/src/index.js",
-    "start-fe": "cd frontend && webpack-dev-server",
     "watch": "webpack --config frontend/webpack.dev.js --progress --colors --watch"
   },
   "repository": {
