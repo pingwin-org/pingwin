@@ -1,5 +1,6 @@
 # pingwin
-Ping Pong Elo-rating website
+Ping Pong Elo-rating website.
+
 Requires [nodejs](nodejs.org) and [mongo](mongodb.com)
 
 - `npm install`
