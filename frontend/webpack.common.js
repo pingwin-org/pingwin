@@ -23,7 +23,7 @@ module.exports.config = {
   module: {
     rules: [
         { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
-        { test: /\.png$/, loader: 'url-loader', exclude: /node_modules/ },
+        { test: /\.(png|svg|jpg)$/, loader: 'file-loader?name=images/[hash].[ext]', exclude: /node_modules/ },
         { test: /\.scss$/,
           use: [{
             loader: 'style-loader'
