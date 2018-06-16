@@ -22,8 +22,8 @@ export function fetchMatches () {
     })
     .then(response => {
       const matches = response.data.sort((a, b) => {
-        const aDate = new Date(a.date).getTime();
-        const bDate = new Date(b.date).getTime();
+        const aDate = new Date(a.date ? a.date : a.createdAt).getTime();
+        const bDate = new Date(b.date ? b.date : b.createdAt).getTime();
         return bDate - aDate;
       });
       dispatch(fetchMatchesSuccess(matches));
