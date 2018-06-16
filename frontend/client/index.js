@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
+import socketService from './services/SocketService';
+
 // Bootstrap v4 wrappen in some custom scss
 import './scss/main.scss';
 // Redux (Data store for the client)
@@ -32,6 +34,8 @@ const store = createStore(
 
 store.dispatch(fetchUsers());
 store.dispatch(fetchMatches());
+
+socketService.init(store);
 
 ReactDOM.render(
   <Provider store={store}>
