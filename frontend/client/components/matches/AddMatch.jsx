@@ -23,9 +23,7 @@ class AddMatch extends React.Component {
     this.state = {
       form: {
         username1: '',
-        pin1: '',
         username2: '',
-        pin2: '',
         winner: ''
       }
     };
@@ -44,7 +42,6 @@ class AddMatch extends React.Component {
   // TODO: This should be its own Component
   playerInput (nbr) {
     const userString = 'username' + nbr;
-    const pinString = 'pin' + nbr;
     return (
       <Col>
         <FormGroup>
@@ -55,10 +52,6 @@ class AddMatch extends React.Component {
               return <option key={user._id} value={user.username}>{user.username}</option>
             })}
           </Input>
-        </FormGroup>
-        <FormGroup>
-          <Label>Pin</Label>
-          <Input type='password' name={pinString} value={this.state.form[pinString]} onChange={this.handleChange} />
         </FormGroup>
       </Col>
     );
@@ -106,24 +99,19 @@ class AddMatch extends React.Component {
     // TODO: just map form to this instead?
     const matchObj = {
       player1: {
-        username: f.username1,
-        pin: f.pin1
+        username: f.username1
       },
       player2: {
-        username: f.username2,
-        pin: f.pin2
+        username: f.username2
       },
       winner: f.winner
     };
     this.props.addMatch(matchObj);
-    // TODO: somehow clear pins on only submit success
     // TODO: jump to match list on success
-    f.pin1 = '';
-    f.pin2 = '';
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => { 
   return {
     addMatch: (match) => {
       return dispatch(addMatch(match));

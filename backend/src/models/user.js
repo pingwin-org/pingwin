@@ -23,12 +23,6 @@ const UserSchema = new mongoose.Schema({
   losses: {
     type: Number,
     default: 0
-  },
-  pin: {
-    type: Number,
-    min: 0,
-    max: 9999,
-    required: true
   }
 });
 

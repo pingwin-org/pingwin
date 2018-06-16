@@ -5,6 +5,7 @@ const Match = require('mongoose').model('Match');
 const User = require('mongoose').model('User');
 
 const elo = require('../elo');
+const socketio = require('../socket.io');
 
 matches.get('/', async function (req, res) {
   const matches = await Match.find({}).exec();
@@ -33,24 +34,11 @@ matches.post('/', async function (req, res) {
       return;
     }
 
-    if ('' + player1.pin !== newMatch.player1.pin) {
-      res.status(400).send('Incorrect pin for Player 1');
-      return;
-    }
-
-    if ('' + player2.pin !== newMatch.player2.pin) {
-      res.status(400).send('Incorrect pin for Player 2');
-      return;
-    }
-
     if (newMatch.winner !== newMatch.player1.username &&
         newMatch.winner !== newMatch.player2.username) {
       res.status(400).send('Incorrect winner');
       return;
     }
-
-    delete newMatch.player1.pin;
-    delete newMatch.player2.pin;
 
     newMatch.player1.rating = player1.rating;
     newMatch.player2.rating = player2.rating;
@@ -83,6 +71,7 @@ matches.post('/', async function (req, res) {
 
     console.log('Added new match', newMatch);
     res.sendStatus(200);
+    socketio.notifyUpdate('NEW_MATCH', match.id);
   } catch (e) {
     console.log('error posting match', e);
     res.status(500).send(e.message);

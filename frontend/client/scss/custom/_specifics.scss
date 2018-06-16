@@ -6,3 +6,16 @@ html {
   position: relative;
   min-height: 100%;
 }
+
+.form-group {
+  label, input, button {
+    margin-right: 10px;
+  }
+  label {
+    font-size: 20px;
+  }
+}
+
+.alert {
+  margin-top: 10px;
+}
