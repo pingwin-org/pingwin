@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 const api = require('./api');
 const app = express();
 
-mongoose.connect('mongodb://172.17.0.2/pingwin');
+mongoose.connect('mongodb://localhost/pingwin');
 
 // Serve static content from src/web
 //app.use(express.static('src/web'));
