@@ -1,5 +1,6 @@
 import io from 'socket.io-client';
 import { fetchMatches } from '../actions/matches';
+import { fetchUsers } from '../actions/users';
 
 let socket;
 let dispatch;
