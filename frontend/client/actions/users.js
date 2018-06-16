@@ -53,7 +53,6 @@ export function addUser(username, pin) {
       pin
     })
     .then((response) => {
-      dispatch(fetchUsers());
       dispatch(addUserSuccess());
     }, (error) => {
       console.error(error);
