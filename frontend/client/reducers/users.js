@@ -18,11 +18,13 @@ const users = (state = {}, action) => {
       });
     case 'ADD_USER':
       return Object.assign({}, state, {
+        userWasAdded: false,
         addingUser: true,
         addUserError: null
       });
     case 'ADD_USER_SUCCESS':
       return Object.assign({}, state, {
+        userWasAdded: true,
         addingUser: false,
         addUserError: null
       });

@@ -8,7 +8,6 @@ export default class Front extends React.Component {
   render () {
     return (
       <Container>
-
         <Row>
           <Col className='container col-6 bg'>
             <Link to='/users'>
