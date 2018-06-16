@@ -111,7 +111,7 @@ class AddMatch extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => { 
   return {
     addMatch: (match) => {
       return dispatch(addMatch(match));

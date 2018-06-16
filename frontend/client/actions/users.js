@@ -52,7 +52,6 @@ export function addUser (username) {
       username
     })
     .then((response) => {
-      dispatch(fetchUsers());
       dispatch(addUserSuccess());
     }, (error) => {
       console.error(error);
