@@ -22,9 +22,8 @@ class AddMatch extends React.Component {
     // TODO: move this state into redux
     this.state = {
       form: {
-        username1: '',
-        username2: '',
-        winner: ''
+        winner: '',
+        loser: ''
       }
     };
     this.handleChange = this.handleChange.bind(this);
@@ -40,12 +39,12 @@ class AddMatch extends React.Component {
     }
   }
   // TODO: This should be its own Component
-  playerInput (nbr) {
-    const userString = 'username' + nbr;
+  player (desc) {
+    const userString = desc;
     return (
       <Col>
         <FormGroup>
-          <Label>{'Player ' + nbr}</Label>
+          <Label style={{'textTransform': 'capitalize'}}>{userString}</Label>
           <Input type='select' name={userString} value={this.state.form[userString]} onChange={this.handleChange}>
             <option value={''}>Select player</option>
             {this.props.users && this.props.users.map(user => {
@@ -64,19 +63,9 @@ class AddMatch extends React.Component {
           <h3 style={{'textAlign': 'center'}} >Add Match</h3>
           <Form onSubmit={this.handleSubmit}>
             <Row>
-              {this.playerInput(1)}
-              {this.playerInput(2)}
+              {this.player('winner')}
+              {this.player('loser')}
             </Row>
-            <FormGroup>
-              <Label>
-                Winner
-              </Label>
-              <Input type='select' name='winner' onChange={this.handleChange}>
-                <option value={''}>Select a winner</option>
-                <option value={this.state.form.username1}>{this.state.form.username1}</option>
-                <option value={this.state.form.username2}>{this.state.form.username2}</option>
-              </Input>
-            </FormGroup>
             <Button type='submit' color='success' value='Submit'>Submit</Button>
           </Form>
           {this.statusBox(this.state.status)}
@@ -98,13 +87,8 @@ class AddMatch extends React.Component {
     const f = this.state.form;
     // TODO: just map form to this instead?
     const matchObj = {
-      player1: {
-        username: f.username1
-      },
-      player2: {
-        username: f.username2
-      },
-      winner: f.winner
+      winner: f.winner,
+      loser: f.loser
     };
     this.props.addMatch(matchObj);
     // TODO: jump to match list on success
