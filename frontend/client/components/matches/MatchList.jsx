@@ -13,15 +13,21 @@ class MatchList extends React.Component {
     let matchTable;
     if (this.props.matches) {
       matchTable = this.props.matches.map(match => {
-        const winner = match.player1.username === match.winner ? match.player1 : match.player2;
-        const loser = match.player1.username === match.winner ? match.player2 : match.player1;
+        let winner, loser;
+        if (match.winner) {
+          winner = match.player1.username === match.winner ? match.player1 : match.player2;
+          loser = match.player1.username === match.winner ? match.player2 : match.player1;
+        } else {
+          winner = match.player1.winner ? match.player1 : match.player2;
+          loser = match.player2.winner ? match.player1 : match.player2;
+        }
         const n = 'numeric';
         return <tr key={match._id}>
-            <td>{new Date(match.date).toLocaleString('en-GB', {hour12: false, day: n, month: n, hour: n, minute: n})}</td>
-            <td>{winner.username} ({winner.rating})</td>
-            <td>{this.renderRatingGain(winner.ratingGain)}</td>
-            <td>{loser.username} ({loser.rating})</td>
-            <td>{this.renderRatingGain(loser.ratingGain)}</td>
+            <td>{new Date(match.date ? match.date : match.createdAt).toLocaleString('en-GB', {hour12: false, day: n, month: n, hour: n, minute: n})}</td>
+            <td>{winner.username} ({winner.rating || winner.newRating})</td>
+            <td>{this.renderRatingGain(winner.ratingGain || winner.ratingDiff)}</td>
+            <td>{loser.username} ({loser.rating || loser.newRating})</td>
+            <td>{this.renderRatingGain(loser.ratingGain || loser.ratingDiff)}</td>
           </tr>;
       });
     }
