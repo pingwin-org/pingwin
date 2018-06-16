@@ -12,7 +12,7 @@ export class Alert extends React.Component {
     // message is the alert message
     // close is a function that closes the alert
     const { color, options, message, close } = this.props;
-    const style = { 'max-width': '15em' };
+    const style = { 'maxWidth': '15em' };
 
     return (
       <StrapAlert className='pt-0' style={style} color={color || 'info'} options={options}>
@@ -35,5 +35,6 @@ export const defaultOptions = {
   position: 'top right',
   timeout: 10000,
   offset: '30px',
-  transition: 'scale'
+  zIndex: 15000 // higher than navbar
+  transition: 'scale',
 };

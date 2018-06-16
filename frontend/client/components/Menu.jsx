@@ -26,7 +26,7 @@ export default class Menu extends React.Component {
   }
   render () {
     return (
-      <Navbar style={{backgroundColor: '#98b89f'}}className='fixed-top' light expand='md'>
+      <Navbar style={{backgroundColor: '#98b89f'}} className='fixed-top' light expand='md'>
         <NavbarBrand tag={RRNavLink} to='/'><img src={logo}/></NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
