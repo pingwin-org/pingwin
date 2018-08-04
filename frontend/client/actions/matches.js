@@ -1,4 +1,5 @@
 import axios from 'axios';
+const apiUrl = 'http://localhost:3000/api/matches';
 
 function fetchMatchesSuccess (matches) {
   return {
@@ -17,20 +18,20 @@ function fetchMatchesError (error) {
 export function fetchMatches () {
   return function (dispatch) {
     dispatch({type: 'FETCH_MATCHES'});
-    return axios.get('http://localhost:3000/api/matches', {
+    return axios.get(apiUrl, {
       headers: { 'Access-Control-Allow-Origin': '*' }
     })
-    .then(response => {
-      const matches = response.data.sort((a, b) => {
-        const aDate = new Date(a.date ? a.date : a.createdAt).getTime();
-        const bDate = new Date(b.date ? b.date : b.createdAt).getTime();
-        return bDate - aDate;
+      .then(response => {
+        const matches = response.data.sort((a, b) => {
+          const aDate = new Date(a.date ? a.date : a.createdAt).getTime();
+          const bDate = new Date(b.date ? b.date : b.createdAt).getTime();
+          return bDate - aDate;
+        });
+        dispatch(fetchMatchesSuccess(matches));
+      }, error => {
+        console.error(error);
+        dispatch(fetchMatchesError(error));
       });
-      dispatch(fetchMatchesSuccess(matches));
-    }, error => {
-      console.error(error);
-      dispatch(fetchMatchesError(error));
-    });
   }
 }
 
@@ -50,16 +51,16 @@ function addMatchError (error) {
 export function addMatch (match) {
   return function (dispatch) {
     dispatch({type: 'ADD_MATCH'});
-    return axios.post('http://localhost:3000/api/matches', match)
-    .then((response) => {
-      dispatch(addMatchSuccess());
-    }, (error) => {
-      console.error(error);
-      if (error.response && error.response.data) {
-        dispatch(addMatchError(error.response.data));
-      } else {
-        dispatch(addMatchError(error));
-      }
-    });
+    return axios.post(apiUrl, match)
+      .then((response) => {
+        dispatch(addMatchSuccess());
+      }, (error) => {
+        console.error(error);
+        if (error.response && error.response.data) {
+          dispatch(addMatchError(error.response.data));
+        } else {
+          dispatch(addMatchError(error));
+        }
+      });
   }
 }

@@ -1,13 +1,14 @@
 import axios from 'axios';
+const apiUrl = 'http://localhost:3000/api/users';
 
-function fetchUsersSuccess(users) {
+function fetchUsersSuccess (users) {
   return {
     type: 'FETCH_USERS_SUCCESS',
     users
   }
 }
 
-function fetchUsersError(error) {
+function fetchUsersError (error) {
   return {
     type: 'FETCH_USERS_ERROR',
     error
@@ -17,28 +18,28 @@ function fetchUsersError(error) {
 export function fetchUsers() {
   return function (dispatch) {
     dispatch({type: 'FETCH_USERS'});
-    return axios.get('http://localhost:3000/api/users', {
+    return axios.get(apiUrl, {
       headers: { 'Access-Control-Allow-Origin': '*' }
     })
-    .then(response => {
-      const users = response.data.sort((a, b) => {
-        return b.rating - a.rating;
+      .then(response => {
+        const users = response.data.sort((a, b) => {
+          return b.rating - a.rating;
+        });
+        dispatch(fetchUsersSuccess(users));
+      }, error => {
+        console.error(error);
+        dispatch(fetchUsersError(error));
       });
-      dispatch(fetchUsersSuccess(users));
-    }, error => {
-      console.error(error);
-      dispatch(fetchUsersError(error));
-    });
   }
 }
 
-function addUserSuccess() {
+function addUserSuccess () {
   return {
     type: 'ADD_USER_SUCCESS'
   }
 }
 
-function addUserError(error) {
+function addUserError (error) {
   return {
     type: 'ADD_USER_ERROR',
     error
@@ -48,18 +49,18 @@ function addUserError(error) {
 export function addUser (username) {
   return function (dispatch) {
     dispatch({type: 'ADD_USER'});
-    return axios.post('http://localhost:3000/api/users', {
+    return axios.post(apiUrl, {
       username
     })
-    .then((response) => {
-      dispatch(addUserSuccess());
-    }, (error) => {
-      console.error(error);
-      if (error.response && error.response.data) {
-        dispatch(addUserError(error.response.data));
-      } else {
-        dispatch(addUserError(error));
-      }
-    });
+      .then((response) => {
+        dispatch(addUserSuccess());
+      }, (error) => {
+        console.error(error);
+        if (error.response && error.response.data) {
+          dispatch(addUserError(error.response.data));
+        } else {
+          dispatch(addUserError(error));
+        }
+      });
   }
 }
