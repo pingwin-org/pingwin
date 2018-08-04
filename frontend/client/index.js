@@ -14,18 +14,14 @@ import reducers from './reducers';
 import thunkMiddleware from 'redux-thunk';
 // react-router-redux (Connect user location-history with state, used for development mainly)
 import createHistory from 'history/createBrowserHistory';
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 // react-alert (pop-up alerts for user feedback)
 import { Provider as AlertProvider } from 'react-alert';
 import { Alert, defaultOptions } from './components/Alert.jsx';
 
 const history = createHistory();
 const store = createStore(
-  combineReducers({
-    user: reducers.users,
-    match: reducers.matches,
-    router: routerReducer
-  }),
+  combineReducers(reducers),
   applyMiddleware(
     routerMiddleware(history),
     thunkMiddleware

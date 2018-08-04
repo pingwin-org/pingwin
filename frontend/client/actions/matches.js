@@ -1,23 +1,30 @@
 import axios from 'axios';
 const apiUrl = 'http://localhost:3000/api/matches';
 
+export const FETCH_MATCHES = 'FETCH_MATCHES';
+export const FETCH_MATCHES_SUCCESS = 'FETCH_MATCHES_SUCCESS';
+export const FETCH_MATCHES_ERROR = 'FETCH_MATCHES';
+export const ADD_MATCH = 'ADD_MATCH';
+export const ADD_MATCH_SUCCESS = 'ADD_MATCH_SUCCESS';
+export const ADD_MATCH_ERROR = 'ADD_MATCH_ERROR';
+
 function fetchMatchesSuccess (matches) {
   return {
-    type: 'FETCH_MATCHES_SUCCESS',
+    type: FETCH_MATCHES_SUCCESS,
     matches
   }
 }
 
 function fetchMatchesError (error) {
   return {
-    type: 'FETCH_MATCHES_ERROR',
+    type: FETCH_MATCHES_ERROR,
     error
   }
 }
 
 export function fetchMatches () {
   return function (dispatch) {
-    dispatch({type: 'FETCH_MATCHES'});
+    dispatch({type: FETCH_MATCHES});
     return axios.get(apiUrl, {
       headers: { 'Access-Control-Allow-Origin': '*' }
     })
@@ -35,22 +42,22 @@ export function fetchMatches () {
   }
 }
 
-function addMatchSuccess (matches) {
+function addMatchSuccess () {
   return {
-    type: 'ADD_MATCH_SUCCESS'
+    type: ADD_MATCH_SUCCESS
   }
 }
 
 function addMatchError (error) {
   return {
-    type: 'ADD_MATCH_ERROR',
+    type: ADD_MATCH_ERROR,
     error
   }
 }
 
 export function addMatch (match) {
   return function (dispatch) {
-    dispatch({type: 'ADD_MATCH'});
+    dispatch({type: ADD_MATCH});
     return axios.post(apiUrl, match)
       .then((response) => {
         dispatch(addMatchSuccess());

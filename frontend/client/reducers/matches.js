@@ -1,32 +1,43 @@
-const matches = (state = {}, action) => {
+import {
+  FETCH_MATCHES,
+  FETCH_MATCHES_SUCCESS,
+  FETCH_MATCHES_ERROR,
+  ADD_MATCH,
+  ADD_MATCH_SUCCESS,
+  ADD_MATCH_ERROR
+} from '../actions/matches'
+
+const initialState = {};
+
+const matches = (state = initialState, action) => {
   switch(action.type) {
-    case 'FETCH_MATCHES':
+    case FETCH_MATCHES:
       return Object.assign({}, state, {
         fetchingMatches: true,
         fetchMatchesError: null
       });
-    case 'FETCH_MATCHES_SUCCESS':
+    case FETCH_MATCHES_SUCCESS:
       return Object.assign({}, state, {
         fetchingMatches: false,
         fetchMatchesError: null,
         matches: action.matches
       });
-    case 'FETCH_MATCHES_ERROR':
+    case FETCH_MATCHES_ERROR:
       return Object.assign({}, state, {
         fetchingMatches: false,
         fetchMatchesError: action.error
       });
-    case 'ADD_MATCH':
+    case ADD_MATCH:
       return Object.assign({}, state, {
         addingMatch: true,
         addMatchError: null
       });
-    case 'ADD_MATCH_SUCCESS':
+    case ADD_MATCH_SUCCESS:
       return Object.assign({}, state, {
         addingMatch: false,
         addMatchError: null
       });
-    case 'ADD_MATCH_ERROR':
+    case ADD_MATCH_ERROR:
       return Object.assign({}, state, {
         addingMatch: false,
         addMatchError: action.error
@@ -34,6 +45,6 @@ const matches = (state = {}, action) => {
     default:
       return state;
   }
-};
+}
 
 export default matches;
