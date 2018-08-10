@@ -24,7 +24,7 @@ function fetchUsersError (error) {
 
 export function fetchUsers() {
   return function (dispatch) {
-    dispatch({type: FETCH_USERS_SUCCESS});
+    dispatch({type: FETCH_USERS});
     return axios.get(apiUrl, {
       headers: { 'Access-Control-Allow-Origin': '*' }
     })

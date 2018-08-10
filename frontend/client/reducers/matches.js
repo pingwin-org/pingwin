@@ -7,10 +7,12 @@ import {
   ADD_MATCH_ERROR
 } from '../actions/matches'
 
-const initialState = {};
+const initialState = {
+  matches: []
+};
 
 const matches = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_MATCHES:
       return Object.assign({}, state, {
         fetchingMatches: true,

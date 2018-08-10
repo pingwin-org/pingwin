@@ -28,6 +28,8 @@ const store = createStore(
   )
 );
 
+console.log('Initial state:', store.getState());
+
 store.dispatch(fetchUsers());
 store.dispatch(fetchMatches());
 
