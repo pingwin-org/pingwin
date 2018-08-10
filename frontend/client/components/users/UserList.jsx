@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class UserList extends React.Component {
   render () {
     const getWinrate = (wins, losses) => {
-      return wins ? Math.round(wins / losses * 100) / 100 : 0;
+      return wins ? Math.round(wins / (wins + losses) * 100) / 100 : 0;
     };
     let userTable;
     if (this.props.users) {
