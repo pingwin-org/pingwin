@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'reactstrap';
 import { connect } from 'react-redux';
 import User from './User.jsx';
+import { updateLeaderboardFilter } from '../../actions';
 
 class UserList extends React.Component {
   render () {
@@ -32,6 +33,15 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLeaderboardFilterUpdate: filterName => {
+      dispatch(updateLeaderboardFilter(filterName))
+    }
+  }
+}
+
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(UserList)

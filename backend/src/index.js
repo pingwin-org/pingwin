@@ -3,7 +3,7 @@
 const path = require('path');
 
 const mongoose = require('mongoose');
-const models = require('./models');
+require('./models'); // required to init models
 
 const express = require('express');
 const cors = require('cors');
@@ -11,8 +11,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const api = require('./api');
 const app = express();
-var server = require('http').Server(app);
-const socketio = require('./socket.io')
+const server = require('http').Server(app);
+const socketio = require('./socket.io');
 
 mongoose.connect('mongodb://localhost/pingwin');
 
@@ -33,7 +33,6 @@ app.use('/', express.static(path.join(__dirname, '../../dist/client/')));
 
 // React App
 app.all('*', function (req, res) {
-
   // If looking for a file return 404.
   if (req.path.includes('.')) {
     res.sendStatus(404);
