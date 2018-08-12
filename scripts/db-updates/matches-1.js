@@ -24,6 +24,7 @@ Match.find({}).then(matches => {
       }
       match.set('player1', newPlayer1);
       match.set('player2', newPlayer2);
+      match.set('createdAt', matchObj.date)
       return match.save();
     } else {
       return Promise.resolve();
