@@ -6,6 +6,13 @@ import { updateLeaderboardFilter } from '../../actions';
 
 class UserList extends React.Component {
   render () {
+    const filterDaysInMs = this.props.daysFilter * (24 * 60 * 60 * 1000)
+    const getFilteredUsers = users => {
+      const now = Date.now().valueOf();
+      return users.filter(user => {
+        return new Date(user.updatedAt).valueOf() > (now - filterDaysInMs)
+      })
+    }
     return (
       <div><Table striped hover>
         <thead>
@@ -19,9 +26,10 @@ class UserList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.users.map((user, index) => (
-            <User key={user._id} {...user} placement={index + 1} />
-          ))}
+          {getFilteredUsers(this.props.users)
+            .map((user, index) => (
+              <User key={user._id} {...user} placement={index + 1} />
+            ))}
         </tbody>
       </Table></div>);
   }
@@ -29,7 +37,8 @@ class UserList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.user.users
+    users: state.user.users,
+    daysFilter: state.leaderboardFilter.dayToLastMatch
   }
 }
 

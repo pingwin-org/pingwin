@@ -1,2 +1,3 @@
-export * from './users.js';
-export * from './matches.js';
+export * from './users'
+export * from './matches'
+export * from './leaderboard-filter'
