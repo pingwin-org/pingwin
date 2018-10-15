@@ -31,7 +31,15 @@ class AddMatch extends React.Component {
   }
   statusBox () {
     if (this.props.addingMatch === false && this.props.error === null) {
-      return (<Alert color='info'>OK</Alert>);
+      return (
+        <Alert color='info'>
+          Match submitted. {this.props.matches[0].player1.username}{"'s "}
+          new rating {this.props.matches[0].player1.newRating}
+          (<font color="green">+{this.props.matches[0].player1.ratingDiff}</font>)
+          {" - " + this.props.matches[0].player2.username}{"'s "}
+          new rating {this.props.matches[0].player2.newRating}
+          (<font color="red">{this.props.matches[0].player2.ratingDiff}</font>)
+        </Alert>);
     } else if (this.props.error) {
       return (<Alert color='warning'>{this.props.error}</Alert>);
     } else {
@@ -46,7 +54,7 @@ class AddMatch extends React.Component {
         <FormGroup>
           <Label style={{'textTransform': 'capitalize'}}>{userString}</Label>
           <Input type='select' name={userString} value={this.state.form[userString]} onChange={this.handleChange}>
-            <option value={''}>Select player</option>
+            <option value={''}>Select {userString}</option>
             {this.props.users && this.props.users.map(user => {
               return <option key={user._id} value={user.username}>{user.username}</option>
             })}
@@ -91,11 +99,17 @@ class AddMatch extends React.Component {
       loser: f.loser
     };
     this.props.addMatch(matchObj);
+    this.setState({
+      form: {
+        winner: '',
+        loser: ''
+      }
+    });
     // TODO: jump to match list on success
   }
 }
 
-const mapDispatchToProps = (dispatch) => { 
+const mapDispatchToProps = (dispatch) => {
   return {
     addMatch: (match) => {
       return dispatch(addMatch(match));
