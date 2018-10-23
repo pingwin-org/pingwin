@@ -22,6 +22,10 @@ function fetchMatchesError (error) {
   }
 }
 
+function getTime(obj) {
+  return new Date(obj.date ? obj.date : obj.createdAt).getTime()
+}
+
 export function fetchMatches () {
   return function (dispatch) {
     dispatch({type: FETCH_MATCHES});
@@ -30,9 +34,9 @@ export function fetchMatches () {
     })
       .then(response => {
         const matches = response.data.sort((a, b) => {
-          const aDate = new Date(a.date ? a.date : a.createdAt).getTime();
-          const bDate = new Date(b.date ? b.date : b.createdAt).getTime();
-          return bDate - aDate;
+          const aTime = getTime(a);
+          const bTime = getTime(b);
+          return bTime - aTime;
         });
         dispatch(fetchMatchesSuccess(matches));
       }, error => {
