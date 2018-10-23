@@ -22,7 +22,7 @@ function fetchMatchesError (error) {
   }
 }
 
-function getTime(obj) {
+function getTime (obj) {
   return new Date(obj.date ? obj.date : obj.createdAt).getTime()
 }
 
