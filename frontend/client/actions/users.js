@@ -7,6 +7,8 @@ export const FETCH_USERS_ERROR = 'FETCH_USERS';
 export const ADD_USER = 'ADD_USER';
 export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS';
 export const ADD_USER_ERROR = 'ADD_USER_ERROR';
+export const NEW_USER = 'NEW_USER';
+export const UPDATED_USER = 'UPDATED_USER';
 
 function fetchUsersSuccess (users) {
   return {
@@ -29,10 +31,7 @@ export function fetchUsers () {
       headers: { 'Access-Control-Allow-Origin': '*' }
     })
       .then(response => {
-        const users = response.data.sort((a, b) => {
-          return b.rating - a.rating;
-        });
-        dispatch(fetchUsersSuccess(users));
+        dispatch(fetchUsersSuccess(response.data));
       }, error => {
         console.error(error);
         dispatch(fetchUsersError(error));
@@ -40,9 +39,10 @@ export function fetchUsers () {
   }
 }
 
-function addUserSuccess () {
+function addUserSuccess (user) {
   return {
-    type: ADD_USER_SUCCESS
+    type: ADD_USER_SUCCESS,
+    user: user
   }
 }
 
@@ -60,7 +60,7 @@ export function addUser (username) {
       username
     })
       .then((response) => {
-        dispatch(addUserSuccess());
+        dispatch(addUserSuccess(response.data));
       }, (error) => {
         console.error(error);
         if (error.response && error.response.data) {
@@ -69,5 +69,23 @@ export function addUser (username) {
           dispatch(addUserError(error));
         }
       });
+  }
+}
+
+export function newUser (user) {
+  return function (dispatch) {
+    dispatch({
+      type: NEW_USER,
+      user: user
+    });
+  }
+}
+
+export function updatedUser (user) {
+  return function (dispatch) {
+    dispatch({
+      type: UPDATED_USER,
+      user: user
+    });
   }
 }

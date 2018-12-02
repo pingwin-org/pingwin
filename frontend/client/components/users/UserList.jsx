@@ -9,8 +9,11 @@ class UserList extends React.Component {
     const filterDaysInMs = this.props.daysFilter * (24 * 60 * 60 * 1000)
     const getFilteredUsers = users => {
       const now = Date.now().valueOf();
-      return users.filter(user => {
+      users.filter(user => {
         return new Date(user.updatedAt).valueOf() > (now - filterDaysInMs)
+      })
+      return users.sort((a, b) => {
+        return b.rating - a.rating;
       })
     }
     return (

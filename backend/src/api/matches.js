@@ -5,7 +5,7 @@ const Match = require('mongoose').model('Match');
 const User = require('mongoose').model('User');
 
 const elo = require('../elo');
-const socketio = require('../socket.io');
+const socketio = require('../socket-io');
 
 matches.get('/', async function (req, res) {
   const matches = await Match.find({}).exec();
@@ -56,7 +56,9 @@ matches.post('/', async function (req, res) {
     const match = await Match.create(newMatch);
 
     console.log('Added new match', newMatch);
-    socketio.notifyUpdate('NEW_MATCH', match.id);
+    socketio.notifyUpdate(socketio.constants.matches.NEW, match.id);
+    socketio.update(socketio.constants.users.UPDATED, winner);
+    socketio.update(socketio.constants.users.UPDATED, loser);
     return res.sendStatus(200);
   } catch (e) {
     console.log('error posting match', e);

@@ -1,0 +1,9 @@
+{
+  "matches": {
+    "NEW": "NEW_MATCH"
+  },
+  "users": {
+    "NEW": "NEW_USER",
+    "UPDATED": "UPDATED_USER"
+  }
+}

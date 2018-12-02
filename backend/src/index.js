@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 const api = require('./api');
 const app = express();
 const server = require('http').Server(app);
-const socketio = require('./socket.io');
+const socketio = require('./socket-io');
 
 mongoose.connect('mongodb://localhost/pingwin');
 
