@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { fetchUsers } from './users';
 const apiUrl = 'http://localhost:3000/api/matches';
 
 export const FETCH_MATCHES = 'FETCH_MATCHES';
@@ -64,6 +65,7 @@ export function addMatch (match) {
     dispatch({type: ADD_MATCH});
     return axios.post(apiUrl, match)
       .then((response) => {
+        dispatch(fetchUsers());
         dispatch(addMatchSuccess());
       }, (error) => {
         console.error(error);

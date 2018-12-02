@@ -22,7 +22,7 @@ function fetchUsersError (error) {
   }
 }
 
-export function fetchUsers() {
+export function fetchUsers () {
   return function (dispatch) {
     dispatch({type: FETCH_USERS});
     return axios.get(apiUrl, {
