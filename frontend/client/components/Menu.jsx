@@ -39,6 +39,9 @@ export default class Menu extends React.Component {
             <NavItem>
               <NavLink tag={RRNavLink} to='/matches'>Matches</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink tag={RRNavLink} to='/stats/users'>User Stats</NavLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>);

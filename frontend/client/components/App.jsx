@@ -7,6 +7,7 @@ import Front from './Front.jsx';
 import AddMatch from './matches/AddMatch.jsx';
 import Matches from './matches/Matches.jsx';
 import Users from './users/Users.jsx';
+import UserStats from './stats/users/Stats.jsx';
 
 export default class App extends React.Component {
   render () {
@@ -18,6 +19,7 @@ export default class App extends React.Component {
           <Route path='/play' component={AddMatch} />
           <Route path='/matches' component={Matches} />
           <Route path='/users' component={Users} />
+          <Route path='/stats/users' component={UserStats} />
         </Switch>
       </div>);
   }
