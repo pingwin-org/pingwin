@@ -13,6 +13,8 @@ const api = require('./api');
 const app = express();
 const server = require('http').Server(app);
 const socketio = require('./socket-io');
+const yggio = require('./yggio');
+const config = require('../config.json');
 
 mongoose.connect('mongodb://localhost/pingwin');
 
@@ -48,3 +50,5 @@ server.listen(3000, function () {
 
 // Start socket.io
 socketio.init(server);
+
+yggio.init(config.YGGIO_URL);
