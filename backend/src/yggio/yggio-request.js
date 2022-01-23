@@ -11,16 +11,21 @@ let yggioUrl = null;
 let accessToken = null;
 
 const refreshToken = async () => {
-  const res = await axios({
-    method: 'post',
-    url: yggioUrl + '/auth/local',
-    json: true,
-    data: {
-      username: config.YGGIO_USERNAME, 
-      password: config.YGGIO_PASSWORD
-    }
-  });
-  accessToken = res.data.token;
+  try {
+    const res = await axios({
+      method: 'post',
+      url: yggioUrl + '/auth/local',
+      json: true,
+      data: {
+        username: config.YGGIO_USERNAME, 
+        password: config.YGGIO_PASSWORD
+      }
+    });
+    accessToken = res.data.token;
+  } catch (e) {
+    console.error('Error when refreshing token.');
+    throw e;
+  }
 };
 
 const doRequest = async ({
@@ -51,25 +56,30 @@ const doRequest = async ({
     },
     formData
   }, Boolean);
-  console.log(axiosData);
   const res = await axios(axiosData);
   return res.data;
 };
 
 const yggioRequest = async (...args) => {
+  let data;
   try {
-    const data = await doRequest(...args);
-    return data;
-  } catch (e) {
-    const jsonError = e.toJSON();
-    if (_.includes([401, 403, 405, 500], jsonError.status)) {
-      await refreshToken();
-      const data = await doRequest(...args);
-      return data;
-    } else {
-      console.log(jsonError);
+    try {
+      data = await doRequest(...args);
+    } catch (e) {
+      const jsonError = e.toJSON();
+      if (_.includes([401, 403, 405, 500], jsonError.status)) {
+        await refreshToken();
+      } else {
+        console.error('Error in Yggio-request, and it\'s not token.');
+        throw e;
+      }
     }
+    data = await doRequest(...args);
+  } catch (err) {
+    console.error(args);
+    console.error(err.toJSON() + ' \n');
   }
+  return data;
 };
 
 module.exports = {

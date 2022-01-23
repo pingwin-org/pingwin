@@ -3,6 +3,7 @@
   "YGGIO_USERNAME": "pingwin-yggio-user",
   "YGGIO_PASSWORD": "Kuq3BR!hF#wOcDwn^wx46i!y^Wsn45VX",
   "BASIC_CREDENTIALS_SET_YGGIO_ID": "61ebc36d8073e50009d36fd0",
+  "YGGIO_MQTT_HOST": "tls://mqtt.staging.yggio.net:8443",
   "MQTT_USERNAME": "pingwin-mqtt-user",
   "MQTT_PASSWORD": "ajAFAadf09iojafAFUa9"
 }
