@@ -7,7 +7,14 @@ const yggioRequest = require('./yggio-request');
 
 const generateMqttTopic = name => 'yggio/generic/v2/pingwin/' + name;
 
-const ensureYggioSetUp = async (topics, name) => {
+let topics = [];
+const updateTopics = async () => {
+  topics = await yggioRequest.get({
+    url: '/api/reserved-mqtt-topics'
+  });
+};
+
+const ensureYggioSetUp = async name => {
   const nameTopic = generateMqttTopic(name);
   if (!_.find(topics, ({topic}) => topic === nameTopic)) {
     try {
@@ -27,6 +34,7 @@ const ensureYggioSetUp = async (topics, name) => {
         }
       });
       await Promise.all([reservedTopicProm, iotnodeProm]);
+      await updateTopics();
     } catch(e) {
       console.error(e.message);
     }
@@ -34,25 +42,25 @@ const ensureYggioSetUp = async (topics, name) => {
 };
 
 const registerMatch = async ({ player1, player2 }) => {
-  const topics = await yggioRequest.get({
-    url: '/api/reserved-mqtt-topics'
-  });
   await Promise.all([
-    await ensureYggioSetUp(topics, player1.username),
-    await ensureYggioSetUp(topics, player2.username)
+    await ensureYggioSetUp(player1.username),
+    await ensureYggioSetUp(player2.username)
   ]);
-  // TODO: fix problems with MQTT
+
   try {
     const client  = await mqtt.connectAsync(config.YGGIO_MQTT_HOST, {username: config.MQTT_USERNAME, password: config.MQTT_PASSWORD});
-    await client.publish(generateMqttTopic(player1.username), JSON.stringify(player1));
-    await client.publish(generateMqttTopic(player2.username), JSON.stringify(player2));
+    await client.publish(generateMqttTopic(player1.username), JSON.stringify({rating: player1.newRating}));
+    await client.publish(generateMqttTopic(player2.username), JSON.stringify({rating: player2.newRating}));
     await client.end();
   } catch (e) {
     console.error(e);
   }
 };
 
-const init = yggioUrl => yggioRequest.setYggioUrl(yggioUrl);
+const init = async yggioUrl => {
+  yggioRequest.setYggioUrl(yggioUrl);
+  await updateTopics();
+};
 
 module.exports = {
   init,
