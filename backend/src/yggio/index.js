@@ -42,10 +42,14 @@ const registerMatch = async ({ player1, player2 }) => {
     await ensureYggioSetUp(topics, player2.username)
   ]);
   // TODO: fix problems with MQTT
-  const client  = await mqtt.connectAsync(config.YGGIO_MQTT_HOST, {username: config.MQTT_USERNAME, password: config.MQTT_PASSWORD});
-  await client.publish(generateMqttTopic(player1.username), JSON.stringify(player1));
-  await client.publish(generateMqttTopic(player2.username), JSON.stringify(player2));
-  await client.end();
+  try {
+    const client  = await mqtt.connectAsync(config.YGGIO_MQTT_HOST, {username: config.MQTT_USERNAME, password: config.MQTT_PASSWORD});
+    await client.publish(generateMqttTopic(player1.username), JSON.stringify(player1));
+    await client.publish(generateMqttTopic(player2.username), JSON.stringify(player2));
+    await client.end();
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 const init = yggioUrl => yggioRequest.setYggioUrl(yggioUrl);
