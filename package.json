@@ -23,6 +23,7 @@
     "async-mqtt": "^2.6.1",
     "axios": "^0.25.0",
     "bootstrap": "^4.0.0",
+    "bottleneck": "^2.19.5",
     "cors": "^2.8.4",
     "css-loader": "^0.28.9",
     "express": "^4.16.2",

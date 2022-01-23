@@ -5,6 +5,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 require('./models'); // required to init models
 
+const Match = mongoose.model('Match');
+
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -51,4 +53,9 @@ server.listen(3000, function () {
 // Start socket.io
 socketio.init(server);
 
-yggio.init(config.YGGIO_URL);
+const initYggio = async () => {
+  const matches= await Match.find({}).exec();
+  await yggio.init(config.YGGIO_URL, matches);
+};
+
+initYggio();
